@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function ProductCard({ image, title, price }) {
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden m-4'>
@@ -8,7 +9,7 @@ function ProductCard({ image, title, price }) {
         <p className='text-gray-700 mb-4'>{price}</p>
         <div className='flex justify-end'>
           <button className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'>
-            <i className='fas fa-shopping-cart'></i>
+            <FontAwesomeIcon icon='shopping-cart' />
           </button>
         </div>
       </div>

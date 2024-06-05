@@ -6,6 +6,7 @@ import BrandHighlights from './components/BrandHighlights';
 import FeaturedProducts from './components/FeaturedProducts';
 import Footer from './components/Footer';
 import Products from './components/Products';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           }
         />
         <Route path='/products' element={<Products />} />
-        <Route path='/login' element={<div>Login</div>} />
+        <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<div>Signup</div>} />
         <Route path='/cart' element={<div>Cart</div>} />
       </Routes>
