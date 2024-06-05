@@ -7,6 +7,7 @@ import FeaturedProducts from './components/FeaturedProducts';
 import Footer from './components/Footer';
 import Products from './components/Products';
 import Login from './components/Login';
+import ProductDetail from './components/ProductDetail';
 import './App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<div>Signup</div>} />
         <Route path='/cart' element={<div>Cart</div>} />
+        <Route path='/productDetail' element={<ProductDetail />} />
       </Routes>
       <Footer />
     </Router>
