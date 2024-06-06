@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 const products = [
   { id: 1, name: 'Product 1', price: '$100', image: 'path/to/image1.jpg' },
   { id: 2, name: 'Product 2', price: '$200', image: 'path/to/image2.jpg' },
@@ -21,11 +22,11 @@ function FeaturedProducts() {
               />
               <h3 className='mt-4 text-xl font-bold'>{product.name}</h3>
               <p className='mt-2 text-gray-600'>{product.price}</p>
-              <a
-                href={`/productDetail`}
+              <Link
+                to={`/productDetail`}
                 className='mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded'>
                 View Product
-              </a>
+              </Link>
             </div>
           ))}
         </div>
