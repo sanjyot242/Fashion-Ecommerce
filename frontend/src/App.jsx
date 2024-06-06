@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Products from './components/Products';
 import Login from './components/Login';
 import ProductDetail from './components/ProductDetail';
+import ShoppingCart from './components/ShoppingCart';
 import './App.css';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<div>Signup</div>} />
-        <Route path='/cart' element={<div>Cart</div>} />
+        <Route path='/cart' element={<ShoppingCart />} />
         <Route path='/productDetail' element={<ProductDetail />} />
       </Routes>
       <Footer />

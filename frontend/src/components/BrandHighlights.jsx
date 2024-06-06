@@ -1,5 +1,3 @@
-import React from 'react';
-
 const brands = [
   { id: 1, name: 'Brand 1', image: 'path/to/brand1.jpg' },
   { id: 2, name: 'Brand 2', image: 'path/to/brand2.jpg' },
