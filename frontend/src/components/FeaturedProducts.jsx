@@ -22,7 +22,7 @@ function FeaturedProducts() {
               <h3 className='mt-4 text-xl font-bold'>{product.name}</h3>
               <p className='mt-2 text-gray-600'>{product.price}</p>
               <a
-                href={`/product/${product.id}`}
+                href={`/productDetail`}
                 className='mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded'>
                 View Product
               </a>
