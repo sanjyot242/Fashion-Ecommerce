@@ -10,6 +10,7 @@ import Login from './components/Login';
 import ProductDetail from './components/ProductDetail';
 import ShoppingCart from './components/ShoppingCart';
 import './App.css';
+import Registration from './components/Registration';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         />
         <Route path='/products' element={<Products />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<div>Signup</div>} />
+        <Route path='/signup' element={<Registration />} />
         <Route path='/cart' element={<ShoppingCart />} />
         <Route path='/productDetail' element={<ProductDetail />} />
       </Routes>
