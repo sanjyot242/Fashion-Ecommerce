@@ -1,6 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/Auth/authSlice';
 function Login() {
+  const dispatch = useDispatch();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const fd = new FormData(event.currentTarget);
+    const userData = {
+      email: fd.get('name'),
+      password: fd.get('password'),
+    };
+
+    console.log(userData);
+    dispatch(login(userData));
+  };
+
   return (
     <section>
       <div className='px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-7xl'>
@@ -33,7 +48,7 @@ function Login() {
                   </div>
                 </div>
               </div>
-              <form action=''>
+              <form onSubmit={handleSubmit}>
                 <div className='space-y-3'>
                   <div>
                     <label
@@ -42,6 +57,7 @@ function Login() {
                       First Name
                     </label>
                     <input
+                      name='name'
                       type='text'
                       placeholder='Username'
                       className='block w-full h-12 border rounded-xl my-2 px-2 py-2'
@@ -52,12 +68,15 @@ function Login() {
                       Passowrd
                     </label>
                     <input
+                      name='password'
                       type='password'
                       placeholder='Enter your password'
                       className='block w-full h-12 border rounded-xl my-2 px-2 py-2'
                     />
                   </div>
-                  <button className='inline-flex items-center  justify-center w-full h-12 bg-gray-900 rounded-xl hover:bg-gray-700  font-medium text-white '>
+                  <button
+                    type='submit'
+                    className='inline-flex items-center  justify-center w-full h-12 bg-gray-900 rounded-xl hover:bg-gray-700  font-medium text-white '>
                     Sign in
                   </button>
                 </div>

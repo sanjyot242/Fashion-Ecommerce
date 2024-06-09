@@ -1,7 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-const productRoutes = require('./routes/productRoutes');
+const cors = require('cors');
+
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 
@@ -10,6 +11,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/auth', authRoutes);
 // app.use(authMiddleware); // Protect routes below this line
