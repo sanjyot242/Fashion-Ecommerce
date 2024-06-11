@@ -6,6 +6,7 @@ const API_BASE_URL = 'http://localhost:5000';
 
 const initailAuthState = {
   user: null,
+  token: localStorage.getItem('token') || null,
   error: null,
   isLoading: false,
 };
@@ -22,8 +23,19 @@ const authSlice = createSlice({
     },
     loginSuccess(state, action) {
       (state.user = action.payload),
+        (state.token = action.payload.token),
         (state.isLoading = false),
         (state.error = null);
+    },
+    checkToken(state) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        state.token = token;
+        // Optionally, you can decode the token and set user state here if needed
+      } else {
+        state.token = null;
+        state.user = null;
+      }
     },
   },
 });
@@ -41,6 +53,7 @@ export const login = (userData) => {
       );
       const user = response.data.user;
       if (user) {
+        localStorage.setItem('token', user.token);
         dispatch(loginActions.loginSuccess(user));
         console.log('login', user);
       }

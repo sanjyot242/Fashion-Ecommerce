@@ -11,8 +11,16 @@ import ProductDetail from './components/ProductDetail';
 import ShoppingCart from './components/ShoppingCart';
 import './App.css';
 import Registration from './components/Registration';
-
+import { loginActions } from '../redux/Auth/authSlice';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loginActions.checkToken());
+  }, [dispatch]);
+
   return (
     <Router>
       <Header />
