@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:5000';
+import axiosInstance from '../../src/utils/axiosInstance';
 
 const initailAuthState = {
   user: null,
@@ -47,10 +45,7 @@ export const login = (userData) => {
     dispatch(loginActions.loginRequest());
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/auth/login`,
-        userData
-      );
+      const response = await axiosInstance.post(`/api/auth/login`, userData);
       const user = response.data.user;
       if (user) {
         localStorage.setItem('token', user.token);

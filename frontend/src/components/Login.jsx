@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/Auth/authSlice';
+import { Link } from 'react-router-dom';
 function Login() {
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
@@ -84,9 +85,11 @@ function Login() {
               <div className='mt-6'>
                 <p className='flex mx-auto text-sm font-medium leading-tight text-center text-black'>
                   Not Registerd ?
-                  <a className='ml-auto text-blue-500 hover:text-black'>
+                  <Link
+                    to='/signup'
+                    className='ml-auto text-blue-500 hover:text-black'>
                     Sign Up now
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

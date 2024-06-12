@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function Registration() {
   return (
     <section>
@@ -135,9 +136,9 @@ function Registration() {
 
               <p className='mt-4 text-sm text-gray-500 sm:mt-0'>
                 Already have an account?
-                <a href='#' className='text-gray-700 underline'>
+                <Link to='/login' className='text-gray-700 underline'>
                   Log in
-                </a>
+                </Link>
                 .
               </p>
             </div>

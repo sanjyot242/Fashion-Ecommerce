@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllProducts } from '../../redux/Product/productSlice';
 
 const productsData = [
   {
@@ -9,6 +10,8 @@ const productsData = [
     image: '/hood.jpg',
     title: 'Milk Hoodie',
     price: '€122.50',
+    color: 'white',
+    size: 'large',
   },
   {
     id: 2,
@@ -22,6 +25,11 @@ const productsData = [
 const categories = ['Hoodies', 'Jackets', 'Shirts', 'Pants'];
 
 function Products() {
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.products.products);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   const handleCategoryChange = (event) => {
@@ -45,11 +53,11 @@ function Products() {
             </select>
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
-            {productsData.map((product) => (
+            {allProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 image={product.image}
-                title={product.title}
+                title={product.name}
                 price={product.price}
               />
             ))}
