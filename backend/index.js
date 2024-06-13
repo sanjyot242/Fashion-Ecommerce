@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
-const authMiddleware = require('./middleware/authMiddleware');
+//const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
 connectDB();
@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 
-app.use(authMiddleware); // Protect routes below this line
+//app.use(authMiddleware); // Protect routes below this line
 app.use('/api/products', productRoutes);
 
 const PORT = process.env.PORT || 5000;

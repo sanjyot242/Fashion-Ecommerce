@@ -4,24 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllProducts } from '../../redux/Product/productSlice';
 
-const productsData = [
-  {
-    id: 1,
-    image: '/hood.jpg',
-    title: 'Milk Hoodie',
-    price: '€122.50',
-    color: 'white',
-    size: 'large',
-  },
-  {
-    id: 2,
-    image: '/hood.jpg',
-    title: 'White Hoodie',
-    price: '€49.50',
-  },
-  // Add more products as needed
-];
-
 const categories = ['Hoodies', 'Jackets', 'Shirts', 'Pants'];
 
 function Products() {
@@ -54,12 +36,7 @@ function Products() {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
             {allProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                image={product.image}
-                title={product.name}
-                price={product.price}
-              />
+              <ProductCard key={product._id} item={product} />
             ))}
           </div>
         </div>

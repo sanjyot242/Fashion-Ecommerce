@@ -11,7 +11,7 @@ const productsSlice = createSlice({
   initialState: initialProductState,
   reducers: {
     listAllProducts(state, action) {
-      state.products = action.payload.data;
+      state.products = action.payload;
     },
     listAllProductFailure(state, action) {
       state.error = action.payload;
@@ -25,7 +25,7 @@ export const getAllProducts = () => {
     try {
       const response = await axiosInstance.get(`/api/products/getProducts`);
       console.log(response);
-      dispatch(productActions.listAllProducts(response));
+      dispatch(productActions.listAllProducts(response.data));
     } catch (error) {
       dispatch(productActions.listAllProductFailure(error));
     }
