@@ -24,7 +24,7 @@ function ProductCard({ item }) {
         }
       });
     } else {
-      navigate(`/productDetail/${item._id}`);
+      navigate(`/product/${item._id}`);
     }
   };
 

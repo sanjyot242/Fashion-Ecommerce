@@ -42,6 +42,7 @@ function App() {
         <Route path='/cart' element={<ShoppingCart />} />
         <Route path='/product/:productId' element={<ProductDetail />}></Route>
         <Route path='/NotFound' element={<ErrorPage />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
       <Footer />
     </Router>

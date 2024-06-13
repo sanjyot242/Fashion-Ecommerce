@@ -15,9 +15,11 @@ const productsSlice = createSlice({
     builder
       .addCase(getAllProductsSummaries.fulfilled, (state, action) => {
         state.summaries = action.payload;
+        state.error = null;
       })
       .addCase(fetchProductDetails.fulfilled, (state, action) => {
         state.details[action.payload.id] = action.payload.details;
+        state.error = null;
       })
       .addCase(getAllProductsSummaries.rejected, (state, action) => {
         state.error = action.error.message;
@@ -47,7 +49,9 @@ export const fetchProductDetails = createAsyncThunk(
   'products/fetchProductDetails',
   async (productId, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(`/api/products/${productId}`);
+      const response = await axiosInstance.get(
+        `/api/products/product/${productId}`
+      );
       return { id: productId, details: response.data };
     } catch (error) {
       return rejectWithValue('Failed to fetch product details.');

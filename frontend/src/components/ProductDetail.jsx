@@ -1,13 +1,34 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchProductDetails } from '../../redux/Product/productSlice';
+
 function ProductDetail() {
+  const { productId } = useParams();
+  console.log(productId);
+  const dispatch = useDispatch();
+
+  const product = useSelector((state) => state.products.details[productId]);
+
+  useEffect(() => {
+    if (!product) {
+      dispatch(fetchProductDetails(productId));
+    }
+  }, [productId, dispatch]);
+
+  if (!product) {
+    return <div>Error</div>;
+  }
+
   return (
     <div className='bg-white py-6 sm:py-8 lg:py-12'>
       <div className='mx-auto max-w-screen-lg px-4 md:px-8'>
         <div className='grid md:grid-cols-2 gap-12'>
           {/* Image section */}
-          <div className='space-y-4'>
+          <div className=' space-y-4'>
             <div className='rounded-lg overflow-hidden'>
               <img
-                src='https://images.unsplash.com/photo-1619785292559-a15caa28bde6?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                src={product.image_url}
                 alt=''
                 loading='lazy'
                 className='w-full h-full object-cover object-center'
@@ -17,14 +38,14 @@ function ProductDetail() {
               <div className='rounded-lg overflow-hidden'>
                 <img
                   className='w-full h-full object-cover object-center'
-                  src='https://images.unsplash.com/photo-1619785690726-89c6b3bd3849?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  src={product.image_url}
                   alt=''
                 />
               </div>
               <div className='rounded-lg overflow-hidden'>
                 <img
                   className='w-full h-full object-cover object-center'
-                  src='https://images.unsplash.com/photo-1619785292489-043ea2cc700c?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  src={product.image_url}
                   alt=''
                 />
               </div>
@@ -34,9 +55,11 @@ function ProductDetail() {
           <div className='md:py-8 space-y-4'>
             {/* !-- name - start -- */}
             <div className='mb-2 md:mb-3'>
-              <span className='text-gray-500 inline-block'>Brand Name </span>
+              <span className='text-gray-500 inline-block'>
+                {product.brand_id} Will be brand name{' '}
+              </span>
               <h2 className='text-2xl font-bold text-gray-800 lg:text-3xl'>
-                Purple Jacket Female
+                {product.name}
               </h2>
             </div>
             {/* !-- name - end -- */}
@@ -113,7 +136,15 @@ function ProductDetail() {
                 Size
               </span>
               <div className='flex flex-wrap gap-3'>
-                <button className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
+                {product.size.map((item, index) => (
+                  <button
+                    key={index}
+                    className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
+                    {item.size}
+                  </button>
+                ))}
+
+                {/* <button className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
                   XS
                 </button>
                 <button className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
@@ -127,7 +158,7 @@ function ProductDetail() {
                 </button>
                 <button className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
                   XL
-                </button>
+                </button> */}
               </div>
             </div>
             {/* <!-- Size - End --> */}
@@ -135,7 +166,7 @@ function ProductDetail() {
             <div className='mb-4'>
               <div className='flex items-end gap-2'>
                 <span className='text-xl font-bold text-gray-800 md:text-2xl'>
-                  $15.00
+                  ${product.price}
                 </span>
                 <span className='mb-0.5 text-red-500 line-through'>$30.00</span>
               </div>
@@ -206,6 +237,7 @@ function ProductDetail() {
                 placeholder text. It shares some characteristics of a real
                 written text but is random or otherwise generated. It may be
                 used to display a sample of fonts or generate text for testing.
+                {product.description}This is from backend
                 <br />
                 <br />
                 This is a section of some simple filler text, also known as
