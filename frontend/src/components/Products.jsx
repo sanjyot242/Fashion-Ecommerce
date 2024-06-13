@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllProducts } from '../../redux/Product/productSlice';
+import { getAllProductsSummaries } from '../../redux/Product/productSlice';
 
 const categories = ['Hoodies', 'Jackets', 'Shirts', 'Pants'];
 
 function Products() {
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products.products);
+  const allProducts = useSelector((state) => state.products.summaries);
+
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProductsSummaries());
   }, [dispatch]);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 

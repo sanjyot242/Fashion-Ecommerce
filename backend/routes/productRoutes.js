@@ -1,12 +1,14 @@
 const express = require('express');
 const {
   addProducts,
-  getProducts,
+  getProductsSummaries,
+  getProductById,
 } = require('../controllers/productController');
 const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 router.post('/addProduct', addProducts);
-router.get('/getProducts', getProducts);
+router.get('/getProductsSummaries', getProductsSummaries); // New route for summaries
+router.get('/product/:id', getProductById); // New route for details
 
 module.exports = router;

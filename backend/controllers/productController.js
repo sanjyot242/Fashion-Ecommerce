@@ -18,13 +18,30 @@ const addProducts = async (req, res) => {
   }
 };
 
-const getProducts = async (req, res) => {
+const getProductsSummaries = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find(
+      {},
+      { name: 1, image_url: 1, price: 1 }
+    );
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = { addProducts, getProducts };
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (product) {
+      res.status(200).json(product);
+    } else {
+      res.status(404).json({ message: 'Product not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { addProducts, getProductsSummaries, getProductById };
