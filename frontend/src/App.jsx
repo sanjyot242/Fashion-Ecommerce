@@ -14,6 +14,7 @@ import Registration from './components/Registration';
 import { loginActions } from '../redux/Auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import ErrorPage from './pages/ErrorPage';
 function App() {
   const dispatch = useDispatch();
 
@@ -39,7 +40,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Registration />} />
         <Route path='/cart' element={<ShoppingCart />} />
-        <Route path='/productDetail' element={<ProductDetail />} />
+        <Route path='/product/:productId' element={<ProductDetail />}></Route>
+        <Route path='/NotFound' element={<ErrorPage />} />
       </Routes>
       <Footer />
     </Router>

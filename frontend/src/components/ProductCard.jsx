@@ -1,10 +1,37 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import { fetchProductDetails } from '../../redux/Product/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 function ProductCard({ item }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const productDetails = useSelector(
+    (state) => state.products.details[item._id]
+  );
+
+  const error = useSelector((state) => state.products.error);
+
+  const handleOnClick = () => {
+    if (!productDetails) {
+      dispatch(fetchProductDetails(item._id)).then(() => {
+        if (error == null) {
+          navigate(`/product/${item?._id}`);
+        } else {
+          navigate(`/NotFound`);
+        }
+      });
+    } else {
+      navigate(`/productDetail/${item._id}`);
+    }
+  };
+
   return (
-    <div className='bg-white rounded-lg shadow-md overflow-hidden m-4'>
+    <div
+      onClick={handleOnClick}
+      className='bg-white rounded-lg shadow-md overflow-hidden m-4'>
       <img
         src={item.image_url}
         alt={item.name}

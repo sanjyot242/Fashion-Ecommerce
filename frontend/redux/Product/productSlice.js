@@ -23,7 +23,7 @@ const productsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       });
   },
 });
@@ -31,19 +31,27 @@ const productsSlice = createSlice({
 //Async thun for product summaries
 export const getAllProductsSummaries = createAsyncThunk(
   'products/getAllProductsSummaries',
-  async () => {
-    const response = await axiosInstance.get(
-      '/api/products/getProductsSummaries'
-    );
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        '/api/products/getProductsSummaries'
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue('Failed to fetch Product summary');
+    }
   }
 );
 
 export const fetchProductDetails = createAsyncThunk(
   'products/fetchProductDetails',
-  async (productId) => {
-    const response = await axiosInstance.get(`/api/products/${productId}`);
-    return { id: productId, details: response.data };
+  async (productId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/api/products/${productId}`);
+      return { id: productId, details: response.data };
+    } catch (error) {
+      return rejectWithValue('Failed to fetch product details.');
+    }
   }
 );
 
