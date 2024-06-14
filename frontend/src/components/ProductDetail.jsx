@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetails } from '../../redux/Product/productSlice';
 
+import { addToCart, updateCart } from '../../redux/Cart/cartSlice';
 function ProductDetail() {
   const { productId } = useParams();
   console.log(productId);
@@ -19,6 +20,19 @@ function ProductDetail() {
   if (!product) {
     return <div>Error</div>;
   }
+
+  const handleAddToCart = () => {
+    console.log('clicked add to cart');
+    dispatch(
+      addToCart({
+        product,
+        quantity: 1,
+        brand_id: product.brand_id,
+        brandName: 'Dynamic Brand Name',
+      })
+    );
+    dispatch(updateCart());
+  };
 
   return (
     <div className='bg-white py-6 sm:py-8 lg:py-12'>
@@ -201,7 +215,7 @@ function ProductDetail() {
             {/* <!-- buttons - start --> */}
             <div className='flex gap-2.5'>
               <a
-                href='#'
+                onClick={handleAddToCart}
                 className='inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base'>
                 Add to cart
               </a>

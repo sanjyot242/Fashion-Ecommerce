@@ -1,6 +1,7 @@
 // controllers/productController.js
 const Product = require('../models/productModel');
 
+//admin route in future
 const addProducts = async (req, res) => {
   const products = req.body;
 
