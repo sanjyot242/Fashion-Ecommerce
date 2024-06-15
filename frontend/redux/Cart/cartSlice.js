@@ -4,12 +4,10 @@ import axiosInstance from '../../src/utils/axiosInstance';
 
 const initialCartState = {
   items: JSON.parse(localStorage.getItem('cartItems')) || [],
-  brands: JSON.parse(localStorage.getItem('cartBrands')) || {},
 };
 
 const saveStateToLocalStorage = (state) => {
   localStorage.setItem('cartItems', JSON.stringify(state.items));
-  localStorage.setItem('cartBrands', JSON.stringify(state.brands));
 };
 
 const cartSlice = createSlice({

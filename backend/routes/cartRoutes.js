@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Cart = require('../models/cartModel');
-const authMiddleware = require('../middleware/authMiddleware');
+const cartMiddleware = require('../middleware/cartMiddleware');
 const { getCart, updateCart } = require('../controllers/cartController');
 
 //fetchCart
-router.get('/', authMiddleware, getCart);
+router.get('/', cartMiddleware, getCart);
 
-router.post('/update', authMiddleware, updateCart);
+router.post('/update', cartMiddleware, updateCart);
 
 module.exports = router;
