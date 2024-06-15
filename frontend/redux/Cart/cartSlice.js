@@ -4,6 +4,7 @@ import axiosInstance from '../../src/utils/axiosInstance';
 
 const initialCartState = {
   items: JSON.parse(localStorage.getItem('cartItems')) || [],
+  item_details: [],
 };
 
 const saveStateToLocalStorage = (state) => {
@@ -25,7 +26,7 @@ const cartSlice = createSlice({
         existingItem.quantity++;
       } else {
         console.log('Creating new item');
-        state.items.push({ ...product, quantity, brand_id });
+        state.items.push({ _id: product._id, quantity, brand_id });
       }
 
       saveStateToLocalStorage(state);
@@ -47,6 +48,9 @@ const cartSlice = createSlice({
       state.items = action.payload;
       saveStateToLocalStorage(state);
     });
+    builder.addCase(fetchCartItemDetails.fulfilled, (state, action) => {
+      state.item_details.push(action.payload.details);
+    });
   },
 });
 
@@ -66,6 +70,20 @@ export const fetchCart = createAsyncThunk(
 
     const response = await axiosInstance.get('/api/cart', { headers });
     return response.data.items;
+  }
+);
+
+export const fetchCartItemDetails = createAsyncThunk(
+  'cart/fetchCartItemDetails',
+  async (product_id, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        `/api/products/product/${product_id}`
+      );
+      return { id: product_id, details: response.data };
+    } catch (error) {
+      return rejectWithValue('Failed to fetch product details.');
+    }
   }
 );
 

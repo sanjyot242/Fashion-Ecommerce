@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import CartItem from './CartItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../../redux/Cart/cartSlice';
 const productsData = [
   {
     id: 1,
@@ -35,6 +38,43 @@ const productsData = [
   },
 ];
 function ShoppingCart() {
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart.items);
+
+  useEffect(() => {
+    console.log('Use effect executed');
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  console.log(cart);
+
+  // const handleQuantityChange = () => {
+  //   console.log('dispatch Quantity changed');
+  // };
+
+  // const handleRemoveItems = () => {
+  //   console.log('Dispatch remove items action');
+  // };
+
+  // const calculateSubtotal = () => {
+  //   return products.reduce(
+  //     (total, product) => total + product.price * product.quantity,
+  //     0
+  //   );
+  // };
+
+  // const calculateShipping = () => {
+  //   return 5.0; // Flat shipping rate for simplicity
+  // };
+
+  // const calculateTax = () => {
+  //   return calculateSubtotal() * 0.08; // 8% tax rate for simplicity
+  // };
+
+  // const calculateTotal = () => {
+  //   return calculateSubtotal() + calculateShipping() + calculateTax();
+  // };
+
   return (
     <div className='max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
       <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
@@ -48,8 +88,8 @@ function ShoppingCart() {
           <ul
             role='list'
             className='border-t border-b border-gray-200 divide-y divide-gray-200'>
-            {productsData.map((product) => (
-              <CartItem key={product.id} {...product} />
+            {cart.map((product, index) => (
+              <CartItem key={index} {...product} />
             ))}
           </ul>
         </section>

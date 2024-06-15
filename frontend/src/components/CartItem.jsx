@@ -1,11 +1,39 @@
-import PropTypes from 'prop-types';
-function CartItem({ id, image, name, color, size, price, inStock, quantity }) {
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
+import axiosInstance from '../utils/axiosInstance';
+
+function CartItem({ _id, quantity }) {
+  const inStock = true;
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `/api/products/product/${_id}`
+        );
+        setProduct(response.data);
+      } catch (err) {
+        setError('Failed to fetch product details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductDetails();
+  }, [_id]);
+
+  if (loading) return <p>Loading product...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <li className='flex py-6 sm:py-10'>
       <div className='flex-shrink-0'>
         <img
-          src={image}
-          alt={name}
+          src={product.image_url}
+          alt={product.name}
           className='w-24 h-24 rounded-md object-cover sm:w-48 sm:h-48'
         />
       </div>
@@ -22,24 +50,27 @@ function CartItem({ id, image, name, color, size, price, inStock, quantity }) {
               </h3>
             </div>
             <div className='mt-1 flex text-sm'>
-              <p className='text-gray-500'>{color}</p>
-              {size ? (
+              <p className='text-gray-500'>{product.color}</p>
+              <p className='ml-4 pl-4 border-l border-gray-200 text-gray-500'>
+                Small
+              </p>
+              {/* {size ? (
                 <p className='ml-4 pl-4 border-l border-gray-200 text-gray-500'>
                   {size}
                 </p>
-              ) : null}
+              ) : null} */}
             </div>
             <p className='mt-1 text-sm font-medium text-gray-900'>
-              ${price.toFixed(2)}
+              ${product.price.toFixed(2)}
             </p>
           </div>
           <div className='mt-4 sm:mt-0 sm:pr-9'>
-            <label htmlFor={`quantity-${id}`} className='sr-only'>
+            <label htmlFor={`quantity-${_id}`} className='sr-only'>
               Quantity, {name}
             </label>
             <select
-              id={`quantity-${id}`}
-              name={`quantity-${id}`}
+              id={`quantity-${_id}`}
+              name={`quantity-${_id}`}
               className='max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
               value={quantity}
               onChange={console.log('Quantity Changed')}>
@@ -69,15 +100,5 @@ function CartItem({ id, image, name, color, size, price, inStock, quantity }) {
     </li>
   );
 }
-CartItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  size: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  inStock: PropTypes.bool.isRequired,
-  quantity: PropTypes.number.isRequired,
-};
 
 export default CartItem;
