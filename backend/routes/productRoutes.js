@@ -4,7 +4,7 @@ const {
   getProductsSummaries,
   getProductById,
 } = require('../controllers/productController');
-const authMiddleware = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
 router.post('/addProduct', addProducts);
