@@ -15,55 +15,36 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addToCart(state, action) {
-      const { product, quantity, brand_id, brandName } = action.payload;
+      const { product, quantity, brand_id } = action.payload;
+      console.log(product);
 
-      const existingItem = state.items.find(
-        (item) => item.product_id === product.id
-      );
+      const existingItem = state.items.find((item) => item._id === product._id);
 
       if (existingItem) {
+        console.log('I have an existing item');
         existingItem.quantity++;
       } else {
+        console.log('Creating new item');
         state.items.push({ ...product, quantity, brand_id });
       }
 
-      if (!state.brands[brand_id]) {
-        state.brands[brand_id] = { brandName, items: [] };
-      }
-
-      state.brands[brand_id].items.push({ ...product, quantity });
       saveStateToLocalStorage(state);
     },
     removeFromCart: (state, action) => {
-      const { product_id, brand_id } = action.payload;
+      const { product_id } = action.payload;
       state.items = state.items.filter(
         (item) => item.product_id !== product_id
       );
-      state.brands[brand_id].items = state.brands[brand_id].items.filter(
-        (item) => item.product_id !== product_id
-      );
-
-      if (state.brands[brand_id].items.length === 0) {
-        delete state.brands[brand_id];
-      }
       saveStateToLocalStorage(state);
     },
     clearCart: (state) => {
       state.items = [];
-      state.brands = {};
       saveStateToLocalStorage(state);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCart.fulfilled, (state, action) => {
       state.items = action.payload;
-      state.brands = action.payload.reduce((acc, item) => {
-        if (!acc[item.brand_id]) {
-          acc[item.brand_id] = { brandName: item.brandName, items: [] };
-        }
-        acc[item.brand_id].items.push(item);
-        return acc;
-      }, {});
       saveStateToLocalStorage(state);
     });
   },
@@ -104,7 +85,12 @@ export const updateCart = createAsyncThunk(
       headers['Session-ID'] = session_id;
     }
 
-    await axiosInstance.post('/api/cart/update', { items }, { headers });
+    const response = await axiosInstance.post(
+      '/api/cart/update',
+      { items },
+      { headers }
+    );
+    console.log(response.headers);
   }
 );
 

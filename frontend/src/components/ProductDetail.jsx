@@ -9,6 +9,8 @@ function ProductDetail() {
   console.log(productId);
   const dispatch = useDispatch();
 
+  const cart = useSelector((state) => state.cart);
+
   const product = useSelector((state) => state.products.details[productId]);
 
   useEffect(() => {
@@ -28,10 +30,11 @@ function ProductDetail() {
         product,
         quantity: 1,
         brand_id: product.brand_id,
-        brandName: 'Dynamic Brand Name',
       })
     );
-    dispatch(updateCart());
+    //dispatch(updateCart());
+
+    console.log('this is current cart ' + JSON.stringify(cart));
   };
 
   return (

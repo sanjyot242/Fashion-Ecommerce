@@ -5,7 +5,6 @@ const crypto = require('crypto'); // For generating session IDs
 //Will have to seperatee middleware for auth and seperate middle ware for Cart
 
 // middleware/authMiddleware.js
-const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization')?.split(' ')[1];
