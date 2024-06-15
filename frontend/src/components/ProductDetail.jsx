@@ -32,9 +32,7 @@ function ProductDetail() {
         brand_id: product.brand_id,
       })
     );
-    //dispatch(updateCart());
-
-    console.log('this is current cart ' + JSON.stringify(cart));
+    dispatch(updateCart());
   };
 
   return (

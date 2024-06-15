@@ -74,7 +74,7 @@ export const updateCart = createAsyncThunk(
   'cart/updateCart',
   async (_, { getState }) => {
     const state = getState();
-    const items = state.cart;
+    const { items } = state.cart;
     const user = state.auth;
     const session_id = localStorage.getItem('session_id');
     const headers = {};
@@ -90,7 +90,10 @@ export const updateCart = createAsyncThunk(
       { items },
       { headers }
     );
-    console.log(response.headers);
+
+    console.log(response);
+
+    localStorage.setItem('session_id', response.data.session_id);
   }
 );
 
