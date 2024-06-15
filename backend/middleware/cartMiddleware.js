@@ -16,14 +16,13 @@ const cartMiddleware = async (req, res, next) => {
   } else {
     // No token, use session ID for unauthenticated users
     let sessionId = req.header('Session-ID');
+    console.log('received session id is ' + sessionId);
     if (!sessionId) {
       console.log('Session ID not received');
       // Generate a new session ID if not present
       sessionId = crypto.randomBytes(16).toString('hex');
       res.setHeader('Session-ID', sessionId); // Send session ID to client
     }
-
-    console.log('Sessionid exists ');
 
     req.user = null; // Clear user for unauthenticated requests
     req.session_id = sessionId;
