@@ -45,7 +45,7 @@ function CartItem({ _id, quantity }) {
                 <a
                   href='#'
                   className='font-medium text-gray-700 hover:text-gray-800'>
-                  {name}
+                  {product.name}
                 </a>
               </h3>
             </div>
@@ -66,7 +66,7 @@ function CartItem({ _id, quantity }) {
           </div>
           <div className='mt-4 sm:mt-0 sm:pr-9'>
             <label htmlFor={`quantity-${_id}`} className='sr-only'>
-              Quantity, {name}
+              Quantity, {product.name}
             </label>
             <select
               id={`quantity-${_id}`}

@@ -4,12 +4,23 @@ const getCart = async (req, res) => {
   const user_id = req.user ? req.user.id : null;
   const session_id = req.session_id;
 
+  console.log('Inside get cart - Session ID:', session_id);
+  console.log('User ID:', user_id);
+
   try {
-    const cart = await Cart.findOne({
-      $or: [{ user_id }, { session_id }],
-    });
+    let cart;
+
+    if (user_id) {
+      cart = await Cart.findOne({ user_id });
+    } else if (session_id) {
+      cart = await Cart.findOne({ session_id });
+    }
+
+    console.log('Cart:', cart);
+
     res.status(200).json(cart || { items: [] });
   } catch (error) {
+    console.error('Error fetching cart:', error.message);
     res.status(500).json({ error: error.message });
   }
 };

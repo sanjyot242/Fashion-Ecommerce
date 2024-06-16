@@ -62,6 +62,8 @@ export const fetchCart = createAsyncThunk(
     const session_id = localStorage.getItem('session_id');
     const headers = {};
 
+    console.log('This is session id attached' + session_id);
+
     if (user.token) {
       headers['Authorization'] = user.token;
     } else {

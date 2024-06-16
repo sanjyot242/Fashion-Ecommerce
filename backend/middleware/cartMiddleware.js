@@ -18,7 +18,7 @@ const cartMiddleware = async (req, res, next) => {
     let sessionId = req.header('Session-ID');
     console.log('received session id is ' + sessionId);
     if (!sessionId) {
-      console.log('Session ID not received');
+      console.log('Session ID not received so creating new Session ');
       // Generate a new session ID if not present
       sessionId = crypto.randomBytes(16).toString('hex');
       res.setHeader('Session-ID', sessionId); // Send session ID to client
@@ -30,7 +30,9 @@ const cartMiddleware = async (req, res, next) => {
     // Create or update a session-based cart entry if necessary
     try {
       const cart = await Cart.findOne({ session_id: sessionId });
+
       if (!cart) {
+        console.log('cart not found so creating carrt for this session');
         await Cart.create({ session_id: sessionId, items: [] });
       }
       next();
