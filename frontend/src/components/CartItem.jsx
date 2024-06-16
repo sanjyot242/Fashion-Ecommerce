@@ -3,7 +3,10 @@
 // import axiosInstance from '../utils/axiosInstance';
 
 import { useDispatch } from 'react-redux';
-import { removeItemFromCart } from '../../redux/Cart/cartSlice';
+import {
+  updateCartQuantity,
+  removeItemFromCart,
+} from '../../redux/Cart/cartSlice';
 
 function CartItem({ product }) {
   const dispatch = useDispatch();
@@ -11,6 +14,11 @@ function CartItem({ product }) {
 
   const removeItemFromCartHandler = () => {
     dispatch(removeItemFromCart(product._id));
+  };
+
+  const onQuantityChangeHandler = (e) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    dispatch(updateCartQuantity({ id: product._id, quantity: newQuantity }));
   };
 
   return (
@@ -58,7 +66,7 @@ function CartItem({ product }) {
               name={`quantity-${product._id}`}
               className='max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
               value={product.quantity}
-              onChange={console.log('Quantity Changed')}>
+              onChange={onQuantityChangeHandler}>
               {[1, 2, 3, 4, 5].map((q) => (
                 <option key={q} value={q}>
                   {q}

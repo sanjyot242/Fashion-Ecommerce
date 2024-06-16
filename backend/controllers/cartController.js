@@ -114,4 +114,9 @@ const removeItemFromCart = async (req, res) => {
   }
 };
 
-module.exports = { getCart, updateCart, removeItemFromCart };
+const changeQuantity = async (req, res) => {
+  console.log(req.body);
+  res.status(200).json(req.body);
+};
+
+module.exports = { getCart, updateCart, removeItemFromCart, changeQuantity };

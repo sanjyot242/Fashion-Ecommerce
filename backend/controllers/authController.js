@@ -35,8 +35,8 @@ const registerUser = async (req, res) => {
         id: savedUser._id,
         name: savedUser.name,
         email: savedUser.email,
+        token,
       },
-      token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
       });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: 2 * 60,
+      expiresIn: '1h',
     });
 
     res.status(200).json({

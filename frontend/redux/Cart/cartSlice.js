@@ -38,6 +38,13 @@ const cartSlice = createSlice({
 
       saveStateToLocalStorage(state);
     },
+
+    changeQuantity(state, action) {
+      const { id, quantity } = action.payload;
+      const existingItem = state.items.find((item) => item._id === id);
+      existingItem.quantity = quantity;
+      saveStateToLocalStorage(state);
+    },
     clearCart: (state) => {
       state.items = [];
       saveStateToLocalStorage(state);
@@ -52,6 +59,9 @@ const cartSlice = createSlice({
       // Update local state after successful backend removal
       state.items = state.items.filter((item) => item._id !== action.payload);
       saveStateToLocalStorage(state);
+    });
+    builder.addCase(updateCartQuantity.fulfilled, (state, action) => {
+      console.log('Do you local updates here ');
     });
   },
 });
@@ -105,6 +115,34 @@ export const updateCart = createAsyncThunk(
   }
 );
 
+export const updateCartQuantity = createAsyncThunk(
+  'cart/updateCartQuantity',
+  async (req, { getState, rejectWithValue }) => {
+    const state = getState();
+    const user = state.auth;
+    const session_id = localStorage.getItem('session_id');
+    const headers = {};
+
+    if (user.token) {
+      headers['Authorization'] = user.token;
+    } else {
+      headers['Session-ID'] = session_id;
+    }
+
+    try {
+      const response = await axiosInstance.put(
+        `/api/cart/item/${req.id}`,
+        { req },
+        { headers }
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const removeItemFromCart = createAsyncThunk(
   'cart/removeItemFromCart',
   async (product_id, { getState, rejectWithValue }) => {
@@ -128,6 +166,6 @@ export const removeItemFromCart = createAsyncThunk(
   }
 );
 
-export const { addToCart, clearCart } = cartSlice.actions;
+export const { addToCart, clearCart, changeQuantity } = cartSlice.actions;
 
 export default cartSlice;
