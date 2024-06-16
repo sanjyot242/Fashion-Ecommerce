@@ -4,7 +4,6 @@ import axiosInstance from '../../src/utils/axiosInstance';
 
 const initialCartState = {
   items: JSON.parse(localStorage.getItem('cartItems')) || [],
-  item_details: [],
 };
 
 const saveStateToLocalStorage = (state) => {
@@ -26,16 +25,17 @@ const cartSlice = createSlice({
         existingItem.quantity++;
       } else {
         console.log('Creating new item');
-        state.items.push({ _id: product._id, quantity, brand_id });
+        state.items.push({
+          _id: product._id,
+          quantity,
+          brand_id,
+          name: product.name,
+          image_url: product.image_url,
+          color: product.color,
+          price: product.price,
+        });
       }
 
-      saveStateToLocalStorage(state);
-    },
-    removeFromCart: (state, action) => {
-      const { product_id } = action.payload;
-      state.items = state.items.filter(
-        (item) => item.product_id !== product_id
-      );
       saveStateToLocalStorage(state);
     },
     clearCart: (state) => {
@@ -48,8 +48,10 @@ const cartSlice = createSlice({
       state.items = action.payload;
       saveStateToLocalStorage(state);
     });
-    builder.addCase(fetchCartItemDetails.fulfilled, (state, action) => {
-      state.item_details.push(action.payload.details);
+    builder.addCase(removeItemFromCart.fulfilled, (state, action) => {
+      // Update local state after successful backend removal
+      state.items = state.items.filter((item) => item._id !== action.payload);
+      saveStateToLocalStorage(state);
     });
   },
 });
@@ -72,20 +74,6 @@ export const fetchCart = createAsyncThunk(
 
     const response = await axiosInstance.get('/api/cart', { headers });
     return response.data.items;
-  }
-);
-
-export const fetchCartItemDetails = createAsyncThunk(
-  'cart/fetchCartItemDetails',
-  async (product_id, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        `/api/products/product/${product_id}`
-      );
-      return { id: product_id, details: response.data };
-    } catch (error) {
-      return rejectWithValue('Failed to fetch product details.');
-    }
   }
 );
 
@@ -117,6 +105,29 @@ export const updateCart = createAsyncThunk(
   }
 );
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const removeItemFromCart = createAsyncThunk(
+  'cart/removeItemFromCart',
+  async (product_id, { getState, rejectWithValue }) => {
+    const state = getState();
+    const user = state.auth;
+    const session_id = localStorage.getItem('session_id');
+    const headers = {};
+
+    if (user.token) {
+      headers['Authorization'] = user.token;
+    } else {
+      headers['Session-ID'] = session_id;
+    }
+
+    try {
+      await axiosInstance.delete(`/api/cart/item/${product_id}`, { headers });
+      return product_id;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const { addToCart, clearCart } = cartSlice.actions;
 
 export default cartSlice;

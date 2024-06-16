@@ -1,32 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
-import axiosInstance from '../utils/axiosInstance';
+// import { useEffect, useState } from 'react';
+// import axiosInstance from '../utils/axiosInstance';
 
-function CartItem({ _id, quantity }) {
+import { useDispatch } from 'react-redux';
+import { removeItemFromCart } from '../../redux/Cart/cartSlice';
+
+function CartItem({ product }) {
+  const dispatch = useDispatch();
   const inStock = true;
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const response = await axiosInstance.get(
-          `/api/products/product/${_id}`
-        );
-        setProduct(response.data);
-      } catch (err) {
-        setError('Failed to fetch product details');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProductDetails();
-  }, [_id]);
-
-  if (loading) return <p>Loading product...</p>;
-  if (error) return <p>{error}</p>;
+  const removeItemFromCartHandler = () => {
+    dispatch(removeItemFromCart(product._id));
+  };
 
   return (
     <li className='flex py-6 sm:py-10'>
@@ -65,14 +50,14 @@ function CartItem({ _id, quantity }) {
             </p>
           </div>
           <div className='mt-4 sm:mt-0 sm:pr-9'>
-            <label htmlFor={`quantity-${_id}`} className='sr-only'>
+            <label htmlFor={`quantity-${product._id}`} className='sr-only'>
               Quantity, {product.name}
             </label>
             <select
-              id={`quantity-${_id}`}
-              name={`quantity-${_id}`}
+              id={`quantity-${product._id}`}
+              name={`quantity-${product._id}`}
               className='max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
-              value={quantity}
+              value={product.quantity}
               onChange={console.log('Quantity Changed')}>
               {[1, 2, 3, 4, 5].map((q) => (
                 <option key={q} value={q}>
@@ -84,7 +69,7 @@ function CartItem({ _id, quantity }) {
               <button
                 type='button'
                 className='-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500'
-                onClick={console.log('Item Removed')}>
+                onClick={removeItemFromCartHandler}>
                 &times;
               </button>
             </div>

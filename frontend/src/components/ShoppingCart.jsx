@@ -2,41 +2,7 @@ import { useEffect } from 'react';
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../../redux/Cart/cartSlice';
-const productsData = [
-  {
-    id: 1,
-    image:
-      'https://images.unsplash.com/photo-1617724757497-79b54c5444d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // replace with actual image paths
-    name: 'Basic Tee',
-    color: 'Sienna',
-    size: 'Large',
-    price: 32.0,
-    inStock: true,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    image:
-      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // replace with actual image paths
-    name: 'Basic Tee',
-    color: 'Black',
-    size: 'Large',
-    price: 32.0,
-    inStock: false,
-    quantity: 1,
-  },
-  {
-    id: 3,
-    image:
-      'https://images.unsplash.com/photo-1535730142260-496e3db19f6f?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // replace with actual image paths
-    name: 'Nomad Tumbler',
-    color: 'White',
-    size: '',
-    price: 35.0,
-    inStock: true,
-    quantity: 1,
-  },
-];
+
 function ShoppingCart() {
   const dispatch = useDispatch();
   const cart = useSelector((store) => store.cart.items);
@@ -48,32 +14,29 @@ function ShoppingCart() {
 
   console.log(cart);
 
-  // const handleQuantityChange = () => {
-  //   console.log('dispatch Quantity changed');
-  // };
+  const calculateSubtotal = () => {
+    const subTotal = cart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    return subTotal.toFixed(2);
+  };
 
-  // const handleRemoveItems = () => {
-  //   console.log('Dispatch remove items action');
-  // };
+  const calculateShipping = () => {
+    return (5.0).toFixed(2); // Flat shipping rate for simplicity
+  };
 
-  // const calculateSubtotal = () => {
-  //   return products.reduce(
-  //     (total, product) => total + product.price * product.quantity,
-  //     0
-  //   );
-  // };
+  const calculateTax = () => {
+    return (calculateSubtotal() * 0.08).toFixed(2); // 8% tax rate for simplicity
+  };
 
-  // const calculateShipping = () => {
-  //   return 5.0; // Flat shipping rate for simplicity
-  // };
-
-  // const calculateTax = () => {
-  //   return calculateSubtotal() * 0.08; // 8% tax rate for simplicity
-  // };
-
-  // const calculateTotal = () => {
-  //   return calculateSubtotal() + calculateShipping() + calculateTax();
-  // };
+  const calculateTotal = () => {
+    return (
+      parseFloat(calculateSubtotal()) +
+      parseFloat(calculateShipping()) +
+      parseFloat(calculateTax())
+    );
+  };
 
   return (
     <div className='max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
@@ -89,7 +52,7 @@ function ShoppingCart() {
             role='list'
             className='border-t border-b border-gray-200 divide-y divide-gray-200'>
             {cart.map((product, index) => (
-              <CartItem key={index} {...product} />
+              <CartItem key={index} product={product} />
             ))}
           </ul>
         </section>
@@ -104,27 +67,35 @@ function ShoppingCart() {
           <dl className='mt-6 space-y-4'>
             <div className='flex items-center justify-between'>
               <dt className='text-sm text-gray-600'>Subtotal</dt>
-              <dd className='text-sm font-medium text-gray-900'>$123.00</dd>
+              <dd className='text-sm font-medium text-gray-900'>
+                ${calculateSubtotal()}
+              </dd>
             </div>
             <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
               <dt className='flex items-center text-sm text-gray-600'>
                 <span>Shipping estimate</span>
                 <span className='ml-2 text-gray-400'>?</span>
               </dt>
-              <dd className='text-sm font-medium text-gray-900'>$13.00</dd>
+              <dd className='text-sm font-medium text-gray-900'>
+                ${calculateShipping()}
+              </dd>
             </div>
             <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
               <dt className='flex items-center text-sm text-gray-600'>
                 <span>Tax estimate</span>
                 <span className='ml-2 text-gray-400'>?</span>
               </dt>
-              <dd className='text-sm font-medium text-gray-900'>$3.76</dd>
+              <dd className='text-sm font-medium text-gray-900'>
+                ${calculateTax()}
+              </dd>
             </div>
             <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
               <dt className='text-base font-medium text-gray-900'>
                 Order total
               </dt>
-              <dd className='text-base font-medium text-gray-900'>$163.70</dd>
+              <dd className='text-base font-medium text-gray-900'>
+                ${calculateTotal()}
+              </dd>
             </div>
           </dl>
           <div className='mt-6'>
