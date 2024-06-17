@@ -38,13 +38,6 @@ const cartSlice = createSlice({
 
       saveStateToLocalStorage(state);
     },
-
-    changeQuantity(state, action) {
-      const { id, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item._id === id);
-      existingItem.quantity = quantity;
-      saveStateToLocalStorage(state);
-    },
     clearCart: (state) => {
       state.items = [];
       saveStateToLocalStorage(state);
@@ -61,7 +54,11 @@ const cartSlice = createSlice({
       saveStateToLocalStorage(state);
     });
     builder.addCase(updateCartQuantity.fulfilled, (state, action) => {
-      console.log('Do you local updates here ');
+      const { id, quantity } = action.payload;
+      console.log(action.payload);
+      const existingItem = state.items.find((item) => item._id === id);
+      existingItem.quantity = quantity;
+      saveStateToLocalStorage(state);
     });
   },
 });

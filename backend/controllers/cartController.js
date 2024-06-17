@@ -115,8 +115,46 @@ const removeItemFromCart = async (req, res) => {
 };
 
 const changeQuantity = async (req, res) => {
-  console.log(req.body);
-  res.status(200).json(req.body);
+  const user_id = req.user ? req.user.id : null;
+  const session_id = req.session_id;
+
+  try {
+    let cart;
+    if (user_id) {
+      cart = await Cart.findOneAndUpdate(
+        { user_id: user_id, 'items._id': req.body.req.id }, // Find cart by user_id and item by _id
+        {
+          $set: {
+            'items.$.quantity': req.body.req.quantity,
+            updated_at: Date.now(),
+          }, // Update quantity
+        },
+        { new: true } // Return the updated document
+      );
+    } else if (session_id) {
+      cart = await Cart.findOneAndUpdate(
+        { session_id: session_id, 'items._id': req.body.req.id }, // Find cart by user_id and item by _id
+        {
+          $set: {
+            'items.$.quantity': req.body.req.quantity,
+            updated_at: Date.now(),
+          }, // Update quantity
+        },
+        { new: true } // Return the updated document
+      );
+    }
+
+    if (cart) {
+      // Optionally, you can repopulate product details if necessary
+      res
+        .status(200)
+        .json({ id: req.body.req.id, quantity: req.body.req.quantity });
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 module.exports = { getCart, updateCart, removeItemFromCart, changeQuantity };
