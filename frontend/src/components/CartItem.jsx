@@ -27,7 +27,7 @@ function CartItem({ product }) {
         <img
           src={product.image_url}
           alt={product.name}
-          className='w-24 h-24 rounded-md object-cover sm:w-48 sm:h-48'
+          className='w-20 h-20 rounded-md object-cover lg:w-32 sm:h-32'
         />
       </div>
       <div className='ml-4 flex-1 flex flex-col justify-between sm:ml-6'>

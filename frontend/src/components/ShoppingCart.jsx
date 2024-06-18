@@ -2,9 +2,12 @@ import { useEffect } from 'react';
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../../redux/Cart/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 function ShoppingCart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const cart = useSelector((store) => store.cart.items);
 
   useEffect(() => {
@@ -13,6 +16,10 @@ function ShoppingCart() {
   }, [dispatch]);
 
   console.log(cart);
+
+  const handleOnClick = () => {
+    navigate('/checkout');
+  };
 
   const calculateSubtotal = () => {
     const subTotal = cart.reduce(
@@ -99,7 +106,9 @@ function ShoppingCart() {
             </div>
           </dl>
           <div className='mt-6'>
-            <button className='w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+            <button
+              onClick={handleOnClick}
+              className='w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
               Checkout
             </button>
           </div>
