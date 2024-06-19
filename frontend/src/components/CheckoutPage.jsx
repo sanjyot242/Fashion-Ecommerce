@@ -3,6 +3,7 @@ import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCart } from '../../redux/Cart/cartSlice';
+import axiosInstance from '../utils/axiosInstance';
 
 function CheckoutPage() {
   const cart = useSelector((store) => store.cart.items);
@@ -11,6 +12,45 @@ function CheckoutPage() {
     console.log('Use effect executed');
     dispatch(fetchCart());
   }, [dispatch]);
+
+  const handlePayNow = async (amount) => {
+    const {
+      data: { key },
+    } = await axiosInstance.get('/api/getKey');
+
+    const {
+      data: { order },
+    } = await axiosInstance.post('/api/payment/createOrder', {
+      amount,
+    });
+
+    console.log(key);
+
+    const options = {
+      key,
+      amount: order.amount,
+      currency: 'INR',
+      name: 'RootSpace Pvt Ltd',
+      description: 'Description',
+      image:
+        'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      order_id: order.id,
+      callback_url: 'http://localhost:5000/api/payment/verifyPayment',
+      prefill: {
+        name: 'Logged in User Name',
+        email: 'username@example.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'Razorpay Corporate Office',
+      },
+      theme: {
+        color: '#121212',
+      },
+    };
+    const razor = new window.Razorpay(options);
+    razor.open();
+  };
 
   const calculateSubtotal = () => {
     const subTotal = cart.reduce(
@@ -177,6 +217,13 @@ function CheckoutPage() {
               <dd className='text-base font-medium text-gray-900'>
                 ${calculateTotal()}
               </dd>
+            </div>
+            <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
+              <button
+                onClick={() => handlePayNow(calculateTotal())}
+                className='p-2 font-semibold text-xl rounded-sm text-white bg-blue-gray-500 w-full hover:bg-blue-gray-800'>
+                Pay Now
+              </button>
             </div>
           </dl>
         </div>

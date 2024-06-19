@@ -7,6 +7,7 @@ const cartMiddleware = async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log('Token After verification' + JSON.stringify(decoded));
       req.user = decoded;
       req.session_id = null; // Clear session_id for authenticated users
       next();
@@ -28,6 +29,7 @@ const cartMiddleware = async (req, res, next) => {
     req.session_id = sessionId;
 
     // Create or update a session-based cart entry if necessary
+    //remove this logic and only cretae this session if added to cart
     try {
       const cart = await Cart.findOne({ session_id: sessionId });
 
