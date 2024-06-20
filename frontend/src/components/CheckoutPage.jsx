@@ -13,7 +13,7 @@ function CheckoutPage() {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const handlePayNow = async (amount) => {
+  const handlePayNow = async (amount, cart) => {
     const {
       data: { key },
     } = await axiosInstance.get('/api/getKey');
@@ -22,6 +22,7 @@ function CheckoutPage() {
       data: { order },
     } = await axiosInstance.post('/api/payment/createOrder', {
       amount,
+      cart,
     });
 
     console.log(key);
@@ -35,7 +36,8 @@ function CheckoutPage() {
       image:
         'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       order_id: order.id,
-      callback_url: 'http://localhost:5000/api/payment/verifyPayment',
+      callback_url:
+        'https://fashion-ecommerce-backend-9deb.onrender.com/api/payment/verifyPayment',
       prefill: {
         name: 'Logged in User Name',
         email: 'username@example.com',
@@ -220,7 +222,7 @@ function CheckoutPage() {
             </div>
             <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
               <button
-                onClick={() => handlePayNow(calculateTotal())}
+                onClick={() => handlePayNow(calculateTotal(), cart)}
                 className='p-2 font-semibold text-xl rounded-sm text-white bg-blue-gray-500 w-full hover:bg-blue-gray-800'>
                 Pay Now
               </button>
