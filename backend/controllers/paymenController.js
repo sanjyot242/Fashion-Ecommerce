@@ -19,7 +19,6 @@ const createOrder = async (req, res) => {
 
     await Order.create({
       id: order.id,
-      order_payment_status: order.status,
       products: products,
       total_price: Number(req.body.amount),
       order_status: 'pending',

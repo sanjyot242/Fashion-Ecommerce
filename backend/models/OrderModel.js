@@ -5,10 +5,6 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  order_payment_status: {
-    type: String,
-    required: true,
-  },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,

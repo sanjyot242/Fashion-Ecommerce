@@ -14,6 +14,10 @@ const paymentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    required: false,
+  },
 });
 
 const Payment = mongoose.model('Payment', paymentSchema);
