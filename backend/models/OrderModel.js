@@ -27,6 +27,8 @@ const orderSchema = new mongoose.Schema({
     enum: ['pending', 'shipped', 'delivered', 'canceled'],
     default: 'pending',
   },
+  payment_status: { type: String, required: true, default: 'Created' },
+
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

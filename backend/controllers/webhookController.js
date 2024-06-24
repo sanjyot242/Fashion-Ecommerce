@@ -1,14 +1,51 @@
 const crypto = require('crypto');
+const Payment = require('../models/paymentModel');
+const Order = require('../models/OrderModel');
 
-const handleyourAuthorizedLogic = (payload) => {
-  console.log(payload);
+const handleyourAuthorizedLogic = async (payload) => {
+  const { id, status, order_id } = payload.payment.entity;
+  console.log(id);
+  const update = {
+    razorpay_order_id: order_id,
+    status: status,
+  };
+  try {
+    const record = await Payment.findOneAndUpdate(
+      { razorpay_payment_id: id },
+      update,
+      { upsert: true }
+    );
+    console.log(record);
+  } catch (error) {
+    console.log(JSON.stringify(error));
+  }
 };
 
-const handleyourCapturedLogic = (payload) => {
-  console.log(payload);
+const handleyourCapturedLogic = async (payload) => {
+  console.log('In captured logic');
+  const { id, status, order_id, captured } = payload.payment.entity;
+  const update = {
+    razorpay_order_id: order_id,
+    status: status,
+    captured: captured,
+  };
+  try {
+    await Payment.findOneAndUpdate({ razorpay_payment_id: id }, update, {
+      upsert: true,
+    });
+    await Order.findOneAndUpdate(
+      { id: order_id },
+      {
+        payment_status: 'Paid',
+      }
+    );
+  } catch (error) {
+    console.log(JSON.stringify(error));
+  }
 };
 
 const handleyourFailedLogic = (payload) => {
+  //payment failed
   console.log(payload);
 };
 

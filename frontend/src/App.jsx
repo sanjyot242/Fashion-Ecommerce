@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import ErrorPage from './pages/ErrorPage';
 import CheckoutPage from './components/CheckoutPage';
+import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage';
 function App() {
   const dispatch = useDispatch();
 
@@ -43,7 +44,12 @@ function App() {
         <Route path='/cart' element={<ShoppingCart />} />
         <Route path='/product/:productId' element={<ProductDetail />} />
         <Route path='/checkout' element={<CheckoutPage />} />
+        <Route
+          path='/paymentSuccessful/:paymentId'
+          element={<PaymentSuccessfulPage />}
+        />
         <Route path='/NotFound' element={<ErrorPage />} />
+
         <Route path='*' element={<ErrorPage />} />
       </Routes>
       <Footer />

@@ -32,6 +32,8 @@ const createOrder = async (req, res) => {
 };
 
 const verifyPayment = async (req, res) => {
+  console.log(req.body);
+
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
     req.body;
 
@@ -49,15 +51,21 @@ const verifyPayment = async (req, res) => {
     .digest('hex');
 
   const isAuthentic = expectedSignature === razorpay_signature;
-
+  debugger;
   if (isAuthentic) {
-    // Will store in DB
-    await Payment.create({
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_signature,
-    });
-    res.status(200).json({ paymentid: razorpay_payment_id });
+    await Payment.findOneAndUpdate(
+      { razorpay_payment_id: razorpay_payment_id },
+      {
+        razorpay_order_id,
+        razorpay_signature,
+        status: 'Authorized',
+      },
+      { upsert: true }
+    );
+
+    res.redirect(
+      `http://localhost:5173/paymentSuccessful/${razorpay_payment_id}`
+    );
   } else {
     res.status(400).json({
       success: false,

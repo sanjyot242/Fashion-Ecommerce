@@ -12,10 +12,14 @@ const paymentSchema = new mongoose.Schema({
   },
   razorpay_signature: {
     type: String,
-    required: true,
+    required: false,
   },
   status: {
     type: String,
+    required: false,
+  },
+  captured: {
+    type: Boolean,
     required: false,
   },
 });
