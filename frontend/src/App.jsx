@@ -45,7 +45,7 @@ function App() {
         <Route path='/product/:productId' element={<ProductDetail />} />
         <Route path='/checkout' element={<CheckoutPage />} />
         <Route
-          path='/paymentSuccessful/:paymentId'
+          path='/paymentSuccessful/:paymentId/:orderId'
           element={<PaymentSuccessfulPage />}
         />
         <Route path='/NotFound' element={<ErrorPage />} />

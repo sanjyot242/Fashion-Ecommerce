@@ -8,7 +8,7 @@ const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const webhookRoutes = require('./routes/webhookRoutes');
-
+const orderRoutes = require('./routes/orderRoutes');
 //const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
@@ -26,6 +26,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 
 app.use('/api/payment', paymentRoutes);
+
+app.use('/api/orders', orderRoutes);
 
 app.get('/api/getkey', (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })
