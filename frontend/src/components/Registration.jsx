@@ -1,5 +1,34 @@
 import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  first_name: yup.string().required('First name is a required field'),
+  last_name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).max(18).required(),
+  password_confirmation: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords dont match')
+    .required(),
+  marketing_accept: yup
+    .boolean()
+    .oneOf([true], 'Please accept terms and condition')
+    .required(),
+});
+
 function Registration() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data) => console.log(data);
+
   return (
     <section>
       <div className='lg:grid lg:grid-cols-12 lg:min-h-[90vh] '>
@@ -20,7 +49,9 @@ function Registration() {
           </div>
         </section>
         <main className='flex items-center justify-center  sm:px-12 lg:col-span-7  xl:col-span-6'>
-          <form action='#' className='mt-8 grid grid-cols-6 gap-6'>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='mt-8 grid grid-cols-6 gap-6'>
             <div className='col-span-6 sm:col-span-3'>
               <label
                 htmlFor='FirstName'
@@ -29,11 +60,15 @@ function Registration() {
               </label>
 
               <input
+                {...register('first_name')}
                 type='text'
                 id='FirstName'
                 name='first_name'
                 className='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'
               />
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.first_name?.message}
+              </p>
             </div>
 
             <div className='col-span-6 sm:col-span-3'>
@@ -44,11 +79,15 @@ function Registration() {
               </label>
 
               <input
+                {...register('last_name')}
                 type='text'
                 id='LastName'
                 name='last_name'
                 className='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'
               />
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.last_name?.message}
+              </p>
             </div>
 
             <div className='col-span-6'>
@@ -60,11 +99,15 @@ function Registration() {
               </label>
 
               <input
+                {...register('email')}
                 type='email'
                 id='Email'
                 name='email'
                 className='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'
               />
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.email?.message}
+              </p>
             </div>
 
             <div className='col-span-6 sm:col-span-3'>
@@ -76,11 +119,15 @@ function Registration() {
               </label>
 
               <input
+                {...register('password')}
                 type='password'
                 id='Password'
                 name='password'
                 className='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'
               />
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.password?.message}
+              </p>
             </div>
 
             <div className='col-span-6 sm:col-span-3'>
@@ -91,16 +138,21 @@ function Registration() {
               </label>
 
               <input
+                {...register('password_confirmation')}
                 type='password'
                 id='PasswordConfirmation'
                 name='password_confirmation'
                 className='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'
               />
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.password_confirmation?.message}
+              </p>
             </div>
 
             <div className='col-span-6'>
               <label htmlFor='MarketingAccept' className='flex gap-4'>
                 <input
+                  {...register('marketing_accept')}
                   type='checkbox'
                   id='MarketingAccept'
                   name='marketing_accept'
@@ -112,6 +164,9 @@ function Registration() {
                   company announcements.
                 </span>
               </label>
+              <p className='m-1 block text-sm font-thin text-red-700'>
+                {errors.marketing_accept?.message}
+              </p>
             </div>
 
             <div className='col-span-6'>
