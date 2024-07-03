@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetails } from '../../redux/Product/productSlice';
 
 import { addToCart, updateCart } from '../../redux/Cart/cartSlice';
 function ProductDetail() {
+  const [selectedSize, setSelectedSize] = useState(null);
   const { productId } = useParams();
   console.log(productId);
   const dispatch = useDispatch();
@@ -19,20 +20,28 @@ function ProductDetail() {
     }
   }, [productId, dispatch]);
 
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
+
   if (!product) {
     return <div>Error</div>;
   }
 
   const handleAddToCart = () => {
-    console.log('clicked add to cart');
-    dispatch(
-      addToCart({
-        product,
-        quantity: 1,
-        brand_id: product.brand_id,
-      })
-    );
-    dispatch(updateCart());
+    if (selectedSize != null) {
+      dispatch(
+        addToCart({
+          product,
+          quantity: 1,
+          size: selectedSize,
+          brand_id: product.brand_id,
+        })
+      );
+      dispatch(updateCart());
+    } else {
+      alert('Please selectt a size ');
+    }
   };
 
   return (
@@ -153,8 +162,14 @@ function ProductDetail() {
               <div className='flex flex-wrap gap-3'>
                 {product.size.map((item, index) => (
                   <button
+                    onClick={() => handleSizeClick(item.size)}
+                    disabled={item.quantity == 0}
                     key={index}
-                    className='h-8 w-12 bg-white rounded-md border-2  font-semibold text-gray-800 hover:bg-gray-100 active:bg-gray-200'>
+                    className={`h-8 w-12  rounded-md border-2 font-semibold text-gray-800 hover:bg-blue-500 ${
+                      item.quantity == 0 ? 'bg-gray-400 cursor-not-allowed' : ''
+                    } ${
+                      selectedSize === item.size ? 'bg-blue-500 text-white' : ''
+                    }`}>
                     {item.size}
                   </button>
                 ))}

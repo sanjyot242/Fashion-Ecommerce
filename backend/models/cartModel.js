@@ -7,6 +7,7 @@ const cartItemSchema = new mongoose.Schema({
     ref: 'Product',
   },
   quantity: { type: Number, required: true, default: 1 },
+  size: { type: String, required: true },
   brand_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Brand',

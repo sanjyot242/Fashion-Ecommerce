@@ -15,9 +15,10 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addToCart(state, action) {
-      const { product, quantity, brand_id } = action.payload;
+      const { product, quantity, brand_id, size } = action.payload;
       console.log(product);
 
+      //add size logic for existing item .
       const existingItem = state.items.find((item) => item._id === product._id);
 
       if (existingItem) {
@@ -33,6 +34,7 @@ const cartSlice = createSlice({
           image_url: product.image_url,
           color: product.color,
           price: product.price,
+          size,
         });
       }
 

@@ -34,6 +34,7 @@ const getCart = async (req, res) => {
           _id: product._id,
           quantity: item.quantity,
           brand_id: item.brand_id,
+          size: item.size,
           name: product.name,
           price: product.price,
           color: product.color,
