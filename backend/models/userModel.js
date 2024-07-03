@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: [addressSchema], required: false },
+  marketing_accept: { type: Boolean, required: true },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

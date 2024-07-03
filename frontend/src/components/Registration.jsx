@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../redux/Auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const schema = yup.object({
   first_name: yup.string().required('First name is a required field'),
@@ -19,16 +23,30 @@ const schema = yup.object({
 });
 
 function Registration() {
+  const { user, token, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    dispatch(registerUser(data));
+  };
 
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+
+    if (user || token) {
+      navigate('/');
+    }
+  }, [user, error, navigate, dispatch]);
   return (
     <section>
       <div className='lg:grid lg:grid-cols-12 lg:min-h-[90vh] '>
@@ -185,8 +203,10 @@ function Registration() {
             </div>
 
             <div className='col-span-6 sm:flex sm:items-center sm:gap-4'>
-              <button className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500'>
-                Create an account
+              <button
+                disabled={isSubmitting}
+                className='inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500'>
+                {isSubmitting ? 'Loading' : 'Create an account'}
               </button>
 
               <p className='mt-4 text-sm text-gray-500 sm:mt-0'>

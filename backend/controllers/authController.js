@@ -4,7 +4,14 @@ const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, address } = req.body;
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      address,
+      marketing_accept,
+    } = req.body;
 
     //check if user already exists
     const existingUser = await User.findOne({ email });
@@ -14,6 +21,8 @@ const registerUser = async (req, res) => {
       });
     }
 
+    const name = first_name + last_name;
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -21,6 +30,7 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
       address: address || [],
+      marketing_accept,
     });
 
     const savedUser = await newUser.save();

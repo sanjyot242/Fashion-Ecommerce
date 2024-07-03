@@ -16,10 +16,10 @@ const authSlice = createSlice({
     loginRequest(state) {
       state.isLoading = true;
     },
-    loginFaliure(state, action) {
+    requestFaliure(state, action) {
       (state.error = action.payload), (state.isLoading = false);
     },
-    loginSuccess(state, action) {
+    requestSuccess(state, action) {
       (state.user = action.payload),
         (state.token = action.payload.token),
         (state.isLoading = false),
@@ -49,11 +49,27 @@ export const login = (userData) => {
       const user = response.data.user;
       if (user) {
         localStorage.setItem('token', user.token);
-        dispatch(loginActions.loginSuccess(user));
+        dispatch(loginActions.requestSuccess(user));
         console.log('login', user);
       }
     } catch (error) {
-      dispatch(loginActions.loginFaliure(error.message));
+      dispatch(loginActions.requestFaliure(error.message));
+    }
+  };
+};
+
+export const registerUser = (userData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.post(`/api/auth/register`, userData);
+      const user = response.data.user;
+      if (user) {
+        localStorage.setItem('token', user.token);
+        dispatch(loginActions.requestSuccess(user));
+        console.log('register', user);
+      }
+    } catch (error) {
+      dispatch(loginActions.requestFaliure(error.message));
     }
   };
 };
