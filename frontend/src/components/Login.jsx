@@ -1,10 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/Auth/authSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, token, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+
+    if (user || token) {
+      navigate('/');
+    }
+  }, [user, error, navigate, dispatch]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);

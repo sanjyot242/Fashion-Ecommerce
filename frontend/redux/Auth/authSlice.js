@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '../../src/utils/axiosInstance';
+import { fetchCart } from '../Cart/cartSlice';
 
 const initailAuthState = {
   user: null,
@@ -50,6 +51,7 @@ export const login = (userData) => {
       if (user) {
         localStorage.setItem('token', user.token);
         dispatch(loginActions.requestSuccess(user));
+        dispatch(fetchCart());
         console.log('login', user);
       }
     } catch (error) {
