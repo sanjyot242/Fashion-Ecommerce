@@ -2,10 +2,16 @@ const razorpayInstance = require('../config/razorPayInstance');
 const crypto = require('crypto');
 const Order = require('../models/OrderModel');
 const Payment = require('../models/paymentModel');
+const Address = require('../models/addressModel');
 const mongoose = require('mongoose');
 
 const createOrder = async (req, res) => {
+  console.log(req.body.data);
   try {
+    const addressData = req.body.data;
+    const address = new Address(addressData);
+    const savedAddress = await address.save();
+
     const options = {
       amount: Number(req.body.amount * 100),
     };
@@ -22,6 +28,7 @@ const createOrder = async (req, res) => {
       products: products,
       total_price: Number(req.body.amount),
       order_status: 'pending',
+      address: savedAddress._id,
     });
 
     res.status(200).json({ order });
@@ -51,7 +58,7 @@ const verifyPayment = async (req, res) => {
     .digest('hex');
 
   const isAuthentic = expectedSignature === razorpay_signature;
-  debugger;
+
   if (isAuthentic) {
     await Payment.findOneAndUpdate(
       { razorpay_payment_id: razorpay_payment_id },

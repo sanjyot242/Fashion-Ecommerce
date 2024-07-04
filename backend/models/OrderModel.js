@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Address = require('./addressModel');
 
 const orderSchema = new mongoose.Schema({
   id: {
@@ -28,7 +29,11 @@ const orderSchema = new mongoose.Schema({
     default: 'pending',
   },
   payment_status: { type: String, required: true, default: 'Created' },
-
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Address',
+  },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

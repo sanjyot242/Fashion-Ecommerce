@@ -3,6 +3,7 @@ const Payment = require('../models/paymentModel');
 const Order = require('../models/OrderModel');
 
 const handleyourAuthorizedLogic = async (payload) => {
+  console.log('In Authorisede Logic');
   const { id, status, order_id } = payload.payment.entity;
   console.log(id);
   const update = {
