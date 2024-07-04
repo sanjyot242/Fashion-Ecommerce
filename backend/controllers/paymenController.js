@@ -71,7 +71,8 @@ const verifyPayment = async (req, res) => {
     );
 
     res.redirect(
-      `http://localhost:5173/paymentSuccessful/${razorpay_payment_id}/${razorpay_order_id}`
+      `http://https://fashion-ecommerce-btv1.onrender.com//paymentSuccessful/${razorpay_payment_id}/${razorpay_order_id}`
+      //`http://localhost:5173/paymentSuccessful/${razorpay_payment_id}/${razorpay_order_id}`
     );
   } else {
     res.status(400).json({
