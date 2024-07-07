@@ -15,7 +15,7 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addToCart(state, action) {
-      const { product, quantity, brand_id, size } = action.payload;
+      const { details: product, quantity, size } = action.payload;
       console.log(product);
 
       //add size logic for existing item .
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
         state.items.push({
           _id: product._id,
           quantity,
-          brand_id,
+          brand_id: product.brand_id,
           name: product.name,
           image_url: product.image_url,
           color: product.color,
