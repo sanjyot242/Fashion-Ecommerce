@@ -4,38 +4,50 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetails } from '../../redux/Product/productSlice';
 
 import { addToCart, updateCart } from '../../redux/Cart/cartSlice';
+import { useQuery } from '@tanstack/react-query';
+import { fetchProductDetailsById } from '../utils/http';
 function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState(null);
   const { productId } = useParams();
   console.log(productId);
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['fetchProductDetails', { id: productId }],
+    queryFn: () => fetchProductDetailsById(productId),
+  });
   const dispatch = useDispatch();
 
   // const cart = useSelector((state) => state.cart);
 
-  const product = useSelector((state) => state.products.details[productId]);
+  // const product = useSelector((state) => state.products.details[productId]);
 
-  useEffect(() => {
-    if (!product) {
-      dispatch(fetchProductDetails(productId));
-    }
-  }, [productId, dispatch]);
+  // useEffect(() => {
+  //   if (!product) {
+  //     dispatch(fetchProductDetails(productId));
+  //   }
+  // }, [productId, dispatch]);
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
 
-  if (!product) {
-    return <div>Error</div>;
+  if (isLoading) {
+    return <div>Loading is in progress</div>;
+  }
+
+  if (isError) {
+    console.error(error);
+    return <div>There is an Error</div>;
   }
 
   const handleAddToCart = () => {
     if (selectedSize != null) {
+      const { details } = data;
       dispatch(
         addToCart({
-          product,
+          details,
           quantity: 1,
           size: selectedSize,
-          brand_id: product.brand_id,
         })
       );
       dispatch(updateCart());
@@ -52,7 +64,7 @@ function ProductDetail() {
           <div className=' space-y-4'>
             <div className='rounded-lg overflow-hidden'>
               <img
-                src={product.image_url}
+                src={data.details.image_url}
                 alt=''
                 loading='lazy'
                 className='w-full h-full object-cover object-center'
@@ -62,14 +74,14 @@ function ProductDetail() {
               <div className='rounded-lg overflow-hidden'>
                 <img
                   className='w-full h-full object-cover object-center'
-                  src={product.image_url}
+                  src={data.details.image_url}
                   alt=''
                 />
               </div>
               <div className='rounded-lg overflow-hidden'>
                 <img
                   className='w-full h-full object-cover object-center'
-                  src={product.image_url}
+                  src={data.details.image_url}
                   alt=''
                 />
               </div>
@@ -80,10 +92,10 @@ function ProductDetail() {
             {/* !-- name - start -- */}
             <div className='mb-2 md:mb-3'>
               <span className='text-gray-500 inline-block'>
-                {product.brand_id} Will be brand name{' '}
+                {data.details.brand_id} Will be brand name{' '}
               </span>
               <h2 className='text-2xl font-bold text-gray-800 lg:text-3xl'>
-                {product.name}
+                {data.details.name}
               </h2>
             </div>
             {/* !-- name - end -- */}
@@ -160,7 +172,7 @@ function ProductDetail() {
                 Size
               </span>
               <div className='flex flex-wrap gap-3'>
-                {product.size.map((item, index) => (
+                {data.details.size.map((item, index) => (
                   <button
                     onClick={() => handleSizeClick(item.size)}
                     disabled={item.quantity == 0}
@@ -196,7 +208,7 @@ function ProductDetail() {
             <div className='mb-4'>
               <div className='flex items-end gap-2'>
                 <span className='text-xl font-bold text-gray-800 md:text-2xl'>
-                  ${product.price}
+                  ${data.details.price}
                 </span>
                 <span className='mb-0.5 text-red-500 line-through'>$30.00</span>
               </div>
@@ -267,7 +279,7 @@ function ProductDetail() {
                 placeholder text. It shares some characteristics of a real
                 written text but is random or otherwise generated. It may be
                 used to display a sample of fonts or generate text for testing.
-                {product.description}This is from backend
+                {data.details.description}This is from backend
                 <br />
                 <br />
                 This is a section of some simple filler text, also known as

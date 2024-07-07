@@ -6,26 +6,16 @@ import { fetchProductDetails } from '../../redux/Product/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function ProductCard({ item }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productDetails = useSelector(
-    (state) => state.products.details[item._id]
-  );
+  // const productDetails = useSelector(
+  //   (state) => state.products.details[item._id]
+  // );
 
-  const error = useSelector((state) => state.products.error);
+  // const error = useSelector((state) => state.products.error);
 
   const handleOnClick = () => {
-    if (!productDetails) {
-      dispatch(fetchProductDetails(item._id)).then(() => {
-        if (error == null) {
-          navigate(`/product/${item?._id}`);
-        } else {
-          navigate(`/NotFound`);
-        }
-      });
-    } else {
-      navigate(`/product/${item._id}`);
-    }
+    navigate(`/product/${item?._id}`);
   };
 
   return (
