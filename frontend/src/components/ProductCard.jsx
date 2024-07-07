@@ -2,8 +2,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { fetchProductDetails } from '../../redux/Product/productSlice';
-import { useDispatch, useSelector } from 'react-redux';
 
 function ProductCard({ item }) {
   // const dispatch = useDispatch();

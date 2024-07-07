@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchProductDetails } from '../../redux/Product/productSlice';
 
 import { addToCart, updateCart } from '../../redux/Cart/cartSlice';
 import { useQuery } from '@tanstack/react-query';
