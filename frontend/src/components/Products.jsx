@@ -17,10 +17,6 @@ function Products() {
     console.log(data);
   }
 
-  if (isError) {
-    console.log('THere is an error');
-  }
-
   // const dispatch = useDispatch();
   // const allProducts = useSelector((state) => state.products.summaries);
 
@@ -39,7 +35,7 @@ function Products() {
   }
 
   if (isError) {
-    <div>There is a an Error</div>;
+    return <div>There is an error fetching data </div>;
   }
 
   return (

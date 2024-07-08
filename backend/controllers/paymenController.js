@@ -6,20 +6,22 @@ const Address = require('../models/addressModel');
 const mongoose = require('mongoose');
 
 const createOrder = async (req, res) => {
-  console.log(req.body.data);
+  console.log(req.body.amount);
   try {
     const addressData = req.body.data;
     const address = new Address(addressData);
     const savedAddress = await address.save();
 
     const options = {
-      amount: Number(req.body.amount * 100),
+      amount: parseInt(req.body.amount * 100),
     };
 
     const products = req.body.cart.map((item) => ({
       product_id: new mongoose.Types.ObjectId(item._id),
       quantity: item.quantity,
     }));
+
+    console.log(options);
 
     const order = await razorpayInstance.orders.create(options);
 
@@ -33,7 +35,7 @@ const createOrder = async (req, res) => {
 
     res.status(200).json({ order });
   } catch (error) {
-    console.log(error);
+    console.log(JSON.stringify(error));
     res.status(404).json({ error: error.toString() });
   }
 };
