@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+
 const products = [
-  { id: 1, name: 'Product 1', price: '$100', image: 'path/to/image1.jpg' },
-  { id: 2, name: 'Product 2', price: '$200', image: 'path/to/image2.jpg' },
-  { id: 3, name: 'Product 3', price: '$300', image: 'path/to/image3.jpg' },
+  { id: 1, name: 'Product 1', price: '$100', image: '/images/image-5.png' },
+  { id: 2, name: 'Product 2', price: '$200', image: '/images/image-6.png' },
+  { id: 3, name: 'Product 3', price: '$300', image: '/images/image-7.png' },
 ];
 
 function FeaturedProducts() {
@@ -18,7 +19,7 @@ function FeaturedProducts() {
               <img
                 src={product.image}
                 alt={product.name}
-                className='w-full h-48 object-cover rounded'
+                className='w-full h-48 object-fill rounded'
               />
               <h3 className='mt-4 text-xl font-bold'>{product.name}</h3>
               <p className='mt-2 text-gray-600'>{product.price}</p>
