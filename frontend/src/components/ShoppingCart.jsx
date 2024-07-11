@@ -47,7 +47,7 @@ function ShoppingCart() {
 
   if (cart && cart.length == 0) {
     return (
-      <div>
+      <div className='text-5xl  justify-center text-center'>
         <p>Cart is empty</p>
       </div>
     );

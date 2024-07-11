@@ -31,11 +31,15 @@ function Products() {
 
   if (isLoading) {
     //add skelton in future
-    return <div>Loading</div>;
+    return <div className='text-5xl  justify-center text-center'>Loading</div>;
   }
 
   if (isError) {
-    return <div>There is an error fetching data </div>;
+    return (
+      <div className='text-5xl  justify-center text-center'>
+        There is an error fetching data
+      </div>
+    );
   }
 
   return (
