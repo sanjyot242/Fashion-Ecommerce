@@ -33,12 +33,20 @@ function Hero() {
           </div>
         </div>
       </section>
-      <div className='w-full lg:h-[122px] h-[146px] bg-black flex  items-center justify-between p-3  '>
-        <img src={versaceSvg} className='w-[166px] h-[33.16px] '></img>
-        <img src={zaraSvg} className='w-[166px] h-[33.16px] '></img>
-        <img src={ckSvg} className='w-[166px] h-[33.16px] '></img>
-        <img src={gucciSvg} className='w-[166px] h-[33.16px] '></img>
-        <img src={pradaSvg} className='w-[166px] h-[33.16px] '></img>
+      <div className='w-full lg:h-[122px] h-auto bg-black flex lg:flex-row flex-col items-center lg:justify-between justify-around p-3 lg:space-y-0 space-y-6'>
+        <img
+          src={versaceSvg}
+          className='w-[166px] h-[33.16px] '
+          alt='Versace'
+        />
+        <img src={zaraSvg} className='w-[166px] h-[33.16px] ' alt='Zara' />
+        <img
+          src={ckSvg}
+          className='w-[166px] h-[33.16px] '
+          alt='Calvin Klein'
+        />
+        <img src={gucciSvg} className='w-[166px] h-[33.16px] ' alt='Gucci' />
+        <img src={pradaSvg} className='w-[166px] h-[33.16px] ' alt='Prada' />
       </div>
     </>
   );

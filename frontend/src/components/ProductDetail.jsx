@@ -49,7 +49,15 @@ function ProductDetail() {
           size: selectedSize,
         })
       );
-      dispatch(updateCart());
+      // Dispatch updateCart and handle the promise
+      dispatch(updateCart())
+        .then(() => {
+          alert('Cart updated successfully!');
+        })
+        .catch((error) => {
+          console.error('Error updating cart:', error);
+          alert('There was an issue updating the cart. Please try again.');
+        });
     } else {
       alert('Please selectt a size ');
     }
