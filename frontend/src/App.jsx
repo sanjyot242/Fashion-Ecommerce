@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import ErrorPage from './pages/ErrorPage';
 import CheckoutPage from './components/CheckoutPage';
 import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage';
+import HomePage from './components/HomePage';
 function App() {
   const dispatch = useDispatch();
 
@@ -25,35 +26,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Hero />
-              <FeaturedProducts />
-              <BrandHighlights />
-            </>
-          }
-        />
-        <Route path='/products' element={<Products />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Registration />} />
-        <Route path='/cart' element={<ShoppingCart />} />
-        <Route path='/product/:productId' element={<ProductDetail />} />
-        <Route path='/checkout' element={<CheckoutPage />} />
-        <Route
-          path='/paymentSuccessful/:paymentId/:orderId'
-          element={<PaymentSuccessfulPage />}
-        />
-        <Route path='/NotFound' element={<ErrorPage />} />
-
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <HomePage/>
   );
 }
 
