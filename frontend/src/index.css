@@ -1,3 +1,157 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.headingsh1regular {
+    @apply text-mobile-headings-h1-regular font-normal font-ebgaramond sm:text-desktop-headings-h1-regular; 
+   }
+.headingsh1medium {
+    @apply text-mobile-headings-h1-medium font-medium font-ebgaramond sm:text-desktop-headings-h1-medium; 
+   }
+   .headingsh1semibold {
+    @apply text-mobile-headings-h1-semi-bold font-semibold italic font-ebgaramond sm:text-desktop-headings-h1-semi-bold; 
+   }
+   .headingsh1bold {
+    @apply text-mobile-headings-h1-bold font-bold font-ebgaramond sm:text-desktop-headings-h1-bold; 
+   }
+   .headingsh2regular {
+    @apply text-mobile-headings-h2-regular font-normal font-ebgaramond sm:text-desktop-headings-h2-regular; 
+   }
+   .headingsh2medium {
+    @apply text-mobile-headings-h2-medium font-medium font-ebgaramond sm:text-desktop-headings-h2-medium; 
+   }
+   .headingsh2semibold {
+    @apply text-mobile-headings-h2-semi-bold font-semibold font-ebgaramond sm:text-desktop-headings-h2-semi-bold; 
+   }
+   .headingsh2bold {
+    @apply text-mobile-headings-h2-bold font-bold font-ebgaramond sm:text-desktop-headings-h2-bold; 
+   }
+   .headingsh3regular {
+    @apply text-mobile-headings-h3-regular font-normal font-ebgaramond sm:text-desktop-headings-h3-regular; 
+   }
+   .headingsh3medium {
+    @apply text-mobile-headings-h3-medium font-medium font-ebgaramond sm:text-desktop-headings-h3-medium; 
+   }
+   .headingsh3semibold {
+    @apply text-mobile-headings-h3-semi-bold font-semibold font-ebgaramond sm:text-desktop-headings-h3-semi-bold; 
+   }
+   .headingsh3bold {
+    @apply text-mobile-headings-h3-bold font-bold font-ebgaramond sm:text-desktop-headings-h3-bold; 
+   }
+   .headingsh4regular {
+    @apply text-mobile-headings-h4-regular font-normal font-ebgaramond sm:text-desktop-headings-h4-regular; 
+   }
+   .headingsh4medium {
+    @apply text-mobile-headings-h4-medium font-medium font-ebgaramond sm:text-desktop-headings-h4-medium; 
+   }
+   .headingsh4semibold {
+    @apply text-mobile-headings-h4-semi-bold font-semibold font-ebgaramond sm:text-desktop-headings-h4-semi-bold; 
+   }
+   .headingsh4bold {
+    @apply text-mobile-headings-h4-bold font-bold font-ebgaramond sm:text-desktop-headings-h4-bold; 
+   }
+   .headingsh5regular {
+    @apply text-mobile-headings-h5-regular font-normal font-ebgaramond sm:text-desktop-headings-h5-regular; 
+   }
+   .headingsh5medium {
+    @apply text-mobile-headings-h5-medium font-medium font-ebgaramond sm:text-desktop-headings-h5-medium; 
+   }
+   .headingsh5semibold {
+    @apply text-mobile-headings-h5-semi-bold font-semibold font-ebgaramond sm:text-desktop-headings-h5-semi-bold; 
+   }
+   .headingsh5bold {
+    @apply text-mobile-headings-h5-bold font-bold font-ebgaramond sm:text-desktop-headings-h5-bold; 
+   }
+   .headingsh6regular {
+    @apply text-mobile-headings-h6-regular font-normal font-ebgaramond sm:text-desktop-headings-h6-regular; 
+   }
+   .headingsh6medium {
+    @apply text-mobile-headings-h6-medium font-medium font-ebgaramond sm:text-desktop-headings-h6-medium; 
+   }
+   .headingsh6semibold {
+    @apply text-mobile-headings-h6-semi-bold font-semibold font-ebgaramond sm:text-desktop-headings-h6-semi-bold; 
+   }
+   .headingsh6bold {
+    @apply text-mobile-headings-h6-bold font-bold font-ebgaramond sm:text-desktop-headings-h6-bold; 
+   }
+   .overline {
+    @apply text-overline-mobile font-semibold font-inter uppercase; 
+   }
+   .paragraphlargeregular {
+    @apply text-paragraph-large-regular font-normal font-ebgaramond; 
+   }
+   .paragraphlargemedium {
+    @apply text-paragraph-large-medium font-medium font-ebgaramond; 
+   }
+   .paragraphlargesemibold {
+    @apply text-paragraph-large-semi-bold font-semibold font-ebgaramond; 
+   }
+   .paragraphlargeunderlined {
+    @apply text-paragraph-large-underlined font-normal font-ebgaramond; 
+   }
+   .paragraphlargestrikethrough {
+    @apply text-paragraph-large-strikethrough font-normal font-ebgaramond; 
+   }
+   .paragraphlargeitalic {
+    @apply text-paragraph-large-italic font-normal italic font-ebgaramond; 
+   }
+   .paragraphmediumregular {
+    @apply text-paragraph-medium-regular font-normal font-ebgaramond; 
+   }
+   .paragraphmediummedium {
+    @apply text-paragraph-medium-medium font-medium font-ebgaramond; 
+   }
+   .paragraphmediumsemibold {
+    @apply text-paragraph-medium-semi-bold font-semibold font-ebgaramond; 
+   }
+   .paragraphmediumunderline {
+    @apply text-paragraph-medium-underline font-normal font-ebgaramond; 
+   }
+   .paragraphmediumstrikethrough {
+    @apply text-paragraph-medium-strikethrough font-normal font-ebgaramond; 
+   }
+   .paragraphmediumitalic {
+    @apply text-paragraph-medium-italic font-normal italic font-ebgaramond; 
+   }
+   .paragraphmediummedium {
+    @apply text-paragraph-medium-medium font-medium font-ebgaramond; 
+   }
+   .paragraphsmallregular {
+    @apply text-paragraph-small-regular font-normal font-ebgaramond; 
+   }
+   .paragraphsmallsemibold {
+    @apply text-paragraph-small-semi-bold font-semibold font-ebgaramond; 
+   }
+   .paragraphsmallmedium {
+    @apply text-paragraph-small-medium font-medium font-ebgaramond; 
+   }
+   .paragraphsmallunderline {
+    @apply text-paragraph-small-underline font-normal font-ebgaramond; 
+   }
+   .paragraphsmallstrikethrough {
+    @apply text-paragraph-small-strikethrough font-normal font-ebgaramond; 
+   }
+   .paragraphsmallitalic {
+    @apply text-paragraph-small-italic font-normal italic font-ebgaramond; 
+   }
+   .paragraphxsmallregular {
+    @apply text-paragraph-xsmall-regular font-normal font-ebgaramond; 
+   }
+   .paragraphxsmallmedium {
+    @apply text-paragraph-xsmall-medium font-medium font-ebgaramond; 
+   }
+   .paragraphxsmallsemibold {
+    @apply text-paragraph-xsmall-semi-bold font-semibold font-ebgaramond; 
+   }
+   .paragraphxsmallunderline {
+    @apply text-paragraph-xsmall-underline font-normal font-ebgaramond; 
+   }
+   .paragraphxsmallstrikethrough {
+    @apply text-paragraph-xsmall-strikethrough font-normal font-ebgaramond; 
+   }
+   .paragraphxsmallitalic {
+    @apply text-paragraph-xsmall-italic font-normal italic font-ebgaramond; 
+   }
+   .overlineweb {
+    @apply text-overline-web font-semibold font-inter uppercase; 
+   }

@@ -123,80 +123,120 @@
 
 
 
+// import React from 'react';
+
+// const Footer = () => {
+//   const socialIcons = [
+//     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c6ad34a30feb4580891a17a84cfc95496eaf0b74f525d211753f2eae833afd7?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Facebook" },
+//     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/806d75f2bfb40a63ce680984099fec613742ee91e61976d5439cb187191ccdeb?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Twitter" },
+//     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/6da4a918199a919b5719eab732bf361b9125a20b0539062f03656c0b64706b10?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Instagram" },
+//     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/7becff92555c8bdb7134c7048558390d468416ead8a86effefb520e46765c4e7?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "LinkedIn" }
+//   ];
+
+//   const customerServiceLinks = [
+//     "Contact us", "FAQs", "Orders and delivery", "Returns and refunds",
+//     "Payment and pricing", "Cryptocurrency payments", "Promotion terms and conditions",
+//     "ROOTSPACE Customer Promise"
+//   ];
+
+//   const aboutLinks = [
+//     "About us", "Investors", "Rootspace partner boutiques", "Careers",
+//     "Modern slavery statement"
+//   ];
+
+//   const footerLinks = ["Privacy policy", "Terms and conditions", "Sitemap"];
+
+//   return (
+//     <footer className="flex flex-col px-32 py-16 w-full bg-gray-900 max-md:px-5 max-md:max-w-full">
+//       <div className="flex gap-2 items-center max-w-full w-[152px]">
+//         <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e240cd0270a20f9189bef27f6d2f50e222c2cd80cf3b22fd2ed7b3d54b059ff?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Rootspace logo" className="object-contain self-stretch my-auto aspect-[1.01] w-[152px]" />
+//       </div>
+//       <div className="flex flex-wrap gap-10 items-start mt-8 w-full text-white max-md:max-w-full">
+//         <div className="flex flex-col min-w-[240px]">
+//           <h2 className="mr-24 text-2xl tracking-tighter leading-none">Rootspace Website</h2>
+//           <p className="mt-4 text-base tracking-tight">Rootspace Website</p>
+//           <div className="flex gap-8 items-center mt-8 text-2xl tracking-tighter leading-none">
+//             <span className="self-stretch my-auto">Follow us: </span>
+//             {socialIcons.map((icon, index) => (
+//               <a key={index} href="#" aria-label={icon.alt}>
+//                 <img loading="lazy" src={icon.src} alt="" className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+//               </a>
+//             ))}
+//           </div>
+//         </div>
+//         <div className="flex flex-col flex-1 shrink basis-0">
+//           <h2 className="text-2xl tracking-tighter leading-none">Destination/Currency</h2>
+//           <div className="flex gap-4 items-start self-start mt-4 text-base tracking-tight">
+//             <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9790c0a6ae7db789fce81fef9cb8e8ea71a1c3cb83eca976c64824223b0916a1?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Flag" className="object-contain shrink-0 w-6 aspect-square" />
+//             <span>India, Rupee, INR</span>
+//           </div>
+//         </div>
+//         <nav className="flex flex-col flex-1 shrink items-start text-base tracking-tight basis-0">
+//           <h2 className="self-stretch text-2xl tracking-tighter leading-none">Customer Service</h2>
+//           {customerServiceLinks.map((link, index) => (
+//             <a key={index} href="#" className="gap-2 self-stretch mt-4 rounded">
+//               {link}
+//             </a>
+//           ))}
+//         </nav>
+//         <nav className="flex flex-col flex-1 shrink items-start text-base tracking-tight basis-0">
+//           <h2 className="self-stretch text-2xl tracking-tighter leading-none">About Rootspace</h2>
+//           {aboutLinks.map((link, index) => (
+//             <a key={index} href="#" className="gap-2 self-stretch mt-4 rounded">
+//               {link}
+//             </a>
+//           ))}
+//         </nav>
+//       </div>
+//       <nav className="flex flex-wrap gap-4 items-center mt-8 w-full text-base tracking-tight text-white max-md:max-w-full">
+//         {footerLinks.map((link, index) => (
+//           <a key={index} href="#" className="gap-2 self-stretch my-auto rounded">
+//             {link}
+//           </a>
+//         ))}
+//       </nav>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
 import React from 'react';
+import Logo from './Logo';
+import SocialLinks from './SocialLinks';
+import AccordionItem from './AccordionItem';
+import '../index.css';
 
-const Footer = () => {
-  const socialIcons = [
-    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c6ad34a30feb4580891a17a84cfc95496eaf0b74f525d211753f2eae833afd7?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Facebook" },
-    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/806d75f2bfb40a63ce680984099fec613742ee91e61976d5439cb187191ccdeb?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Twitter" },
-    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/6da4a918199a919b5719eab732bf361b9125a20b0539062f03656c0b64706b10?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "Instagram" },
-    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/7becff92555c8bdb7134c7048558390d468416ead8a86effefb520e46765c4e7?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba", alt: "LinkedIn" }
-  ];
-
-  const customerServiceLinks = [
-    "Contact us", "FAQs", "Orders and delivery", "Returns and refunds",
-    "Payment and pricing", "Cryptocurrency payments", "Promotion terms and conditions",
-    "ROOTSPACE Customer Promise"
-  ];
-
-  const aboutLinks = [
-    "About us", "Investors", "Rootspace partner boutiques", "Careers",
-    "Modern slavery statement"
-  ];
-
-  const footerLinks = ["Privacy policy", "Terms and conditions", "Sitemap"];
-
+function Footer() {
   return (
-    <footer className="flex flex-col px-32 py-16 w-full bg-gray-900 max-md:px-5 max-md:max-w-full">
-      <div className="flex gap-2 items-center max-w-full w-[152px]">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e240cd0270a20f9189bef27f6d2f50e222c2cd80cf3b22fd2ed7b3d54b059ff?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Rootspace logo" className="object-contain self-stretch my-auto aspect-[1.01] w-[152px]" />
-      </div>
-      <div className="flex flex-wrap gap-10 items-start mt-8 w-full text-white max-md:max-w-full">
-        <div className="flex flex-col min-w-[240px]">
-          <h2 className="mr-24 text-2xl tracking-tighter leading-none">Rootspace Website</h2>
-          <p className="mt-4 text-base tracking-tight">Rootspace Website</p>
-          <div className="flex gap-8 items-center mt-8 text-2xl tracking-tighter leading-none">
-            <span className="self-stretch my-auto">Follow us: </span>
-            {socialIcons.map((icon, index) => (
-              <a key={index} href="#" aria-label={icon.alt}>
-                <img loading="lazy" src={icon.src} alt="" className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
-              </a>
-            ))}
+    <footer className="flex p-16 flex-col items-start gap-32 items-stretch bg-bg-primary-inverse text-text-inverse ">
+      <Logo />
+      <div className="flex flex-col mt-8 w-full gap-32 ">
+        <div className="flex flex-col w-full gap-32" >
+          <div className="flex flex-col gap-16">
+            <h2 className="headingsh5medium">Rootspace Website</h2>
+            <p className="paragraphmediumregular">Rootspace Website</p>
           </div>
+          <SocialLinks />
         </div>
-        <div className="flex flex-col flex-1 shrink basis-0">
-          <h2 className="text-2xl tracking-tighter leading-none">Destination/Currency</h2>
+        <AccordionItem title="Customer Service" />
+        <AccordionItem title="About Rootspace" />
+        <div className="flex flex-col mt-8 max-w-full w-[225px]">
+          <h2 className="text-xl font-medium tracking-tight leading-snug">Destination/Currency</h2>
           <div className="flex gap-4 items-start self-start mt-4 text-base tracking-tight">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9790c0a6ae7db789fce81fef9cb8e8ea71a1c3cb83eca976c64824223b0916a1?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Flag" className="object-contain shrink-0 w-6 aspect-square" />
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/544000ce0ad6af8cb84c2ae1754e46a86e7a9609121038541cf12c9fc5ab1f21?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Flag" className="object-contain shrink-0 w-6 aspect-square" />
             <span>India, Rupee, INR</span>
           </div>
         </div>
-        <nav className="flex flex-col flex-1 shrink items-start text-base tracking-tight basis-0">
-          <h2 className="self-stretch text-2xl tracking-tighter leading-none">Customer Service</h2>
-          {customerServiceLinks.map((link, index) => (
-            <a key={index} href="#" className="gap-2 self-stretch mt-4 rounded">
-              {link}
-            </a>
-          ))}
-        </nav>
-        <nav className="flex flex-col flex-1 shrink items-start text-base tracking-tight basis-0">
-          <h2 className="self-stretch text-2xl tracking-tighter leading-none">About Rootspace</h2>
-          {aboutLinks.map((link, index) => (
-            <a key={index} href="#" className="gap-2 self-stretch mt-4 rounded">
-              {link}
-            </a>
-          ))}
-        </nav>
       </div>
-      <nav className="flex flex-wrap gap-4 items-center mt-8 w-full text-base tracking-tight text-white max-md:max-w-full">
-        {footerLinks.map((link, index) => (
-          <a key={index} href="#" className="gap-2 self-stretch my-auto rounded">
-            {link}
-          </a>
-        ))}
-      </nav>
+      <div className="flex gap-4 items-center mt-8 w-full text-sm leading-none">
+        <a href="#" className="flex-1 shrink gap-2 self-stretch my-auto rounded">Privacy policy</a>
+        <a href="#" className="flex-1 shrink gap-2 self-stretch my-auto rounded">Terms and conditions</a>
+      </div>
     </footer>
   );
-};
+}
 
 export default Footer;
+
+

@@ -1,0 +1,51 @@
+{
+  "textColor": {
+    "text-primary": "'var(--gray-900)'",
+    "text-paragraph": "'var(--gray-600)'",
+    "text-tertiary": "'var(--gray-500)'",
+    "text-disabled": "'var(--gray-300)'",
+    "text-inverse": "'var(--shades-white)'",
+    "text-success": "'var(--success-900)'",
+    "text-information": "'var(--information-900)'",
+    "text-warning": "'var(--warning-600)'",
+    "text-destructive": "'var(--destructive-600)'",
+    "text-success-hover": "'var(--success-800)'",
+    "text-information-hover": "'var(--information-800)'",
+    "text-warning-hover": "'var(--warning-800)'",
+    "text-destructive-hover": "'var(--destructive-800)'",
+    "text-destructive-disabled": "'var(--destructive-500)'",
+    "text-warning-disabled": "'var(--warning-700)'",
+    "text-information-disabled": "'var(--information-700)'",
+    "text-success-disabled": "'var(--success-700)'",
+    "text-light": "'var(--gray-400)'"
+  },
+  "backgroundColor": {
+    "bg-primary": "'var(--shades-white)'",
+    "bg-primary_hover": "'var(--gray-50)'",
+    "bg-secondary": "'var(--gray-100)'",
+    "bg-secondary_hover": "'var(--gray-100)'",
+    "bg-tertiary": "'var(--gray-200)'",
+    "bg-information": "'var(--information-50)'",
+    "bg-destructive": "'var(--destructive-50)'",
+    "bg-success": "'var(--success-50)'",
+    "bg-warning": "'var(--warning-50)'",
+    "bg-primary-inverse": "'var(--gray-900)'",
+    "bg-secondary-inverse": "'var(--gray-400)'",
+    "bg-information-inverse": "'var(--information-600)'",
+    "bg-warning-inverse": "'var(--warning-600)'",
+    "bg-success-inverse": "'var(--success-600)'",
+    "bg-destructive-inverse": "'var(--destructive-600)'"
+  },
+  "borderColor": {
+    "stroke-primary": "'var(--gray-300)'",
+    "stroke-primary_hover": "'var(--gray-200)'",
+    "stroke-secondary": "'var(--gray-200)'",
+    "stroke-secondary_hover": "'var(--gray-400)'",
+    "stroke-tertiary": "'var(--gray-500)'",
+    "stroke-disabled": "'var(--gray-200)'",
+    "stroke-information": "'var(--information-200)'",
+    "stroke-warning": "'var(--warning-200)'",
+    "stroke-success": "'var(--success-200)'",
+    "stroke-destructive": "'var(--destructive-100)'"
+  }
+}

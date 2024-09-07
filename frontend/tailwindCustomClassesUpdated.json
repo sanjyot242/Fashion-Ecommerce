@@ -1,0 +1,51 @@
+{
+  "textColor": {
+    "text-primary": "#151c24",
+    "text-paragraph": "#414e62",
+    "text-tertiary": "#637083",
+    "text-disabled": "#ced2da",
+    "text-inverse": "#ffffff",
+    "text-success": "#064e3b",
+    "text-information": "#0b4a6f",
+    "text-warning": "#d97706",
+    "text-destructive": "#f62c2c",
+    "text-success-hover": "#065f46",
+    "text-information-hover": "#065986",
+    "text-warning-hover": "#92400e",
+    "text-destructive-hover": "#b01111",
+    "text-destructive-disabled": "#ff4d4d",
+    "text-warning-disabled": "#b45309",
+    "text-information-disabled": "#026aa2",
+    "text-success-disabled": "#047857",
+    "text-light": "#97a1af"
+  },
+  "backgroundColor": {
+    "bg-primary": "#ffffff",
+    "bg-primary_hover": "#f9fafb",
+    "bg-secondary": "#f2f4f7",
+    "bg-secondary_hover": "#f2f4f7",
+    "bg-tertiary": "#e4e7ec",
+    "bg-information": "#f0f9ff",
+    "bg-destructive": "#ffe5e5",
+    "bg-success": "#ecfdf5",
+    "bg-warning": "#fffbeb",
+    "bg-primary-inverse": "#151c24",
+    "bg-secondary-inverse": "#97a1af",
+    "bg-information-inverse": "#0086c9",
+    "bg-warning-inverse": "#d97706",
+    "bg-success-inverse": "#059669",
+    "bg-destructive-inverse": "#f62c2c"
+  },
+  "borderColor": {
+    "stroke-primary": "#ced2da",
+    "stroke-primary_hover": "#e4e7ec",
+    "stroke-secondary": "#e4e7ec",
+    "stroke-secondary_hover": "#97a1af",
+    "stroke-tertiary": "#637083",
+    "stroke-disabled": "#e4e7ec",
+    "stroke-information": "#b9e6fe",
+    "stroke-warning": "#fde68a",
+    "stroke-success": "#a7f3d0",
+    "stroke-destructive": "#ffc2c2"
+  }
+}
