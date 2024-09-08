@@ -4,7 +4,7 @@ function AccordionItem({ title }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex overflow-hidden items-center mt-8 w-full text-xl font-medium tracking-tight leading-snug bg-gray-900 rounded">
+    <div className="flex-col overflow-hidden items-center w-full headingsh5medium gap-16">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex flex-1 justify-between items-center w-full text-left"
@@ -19,8 +19,13 @@ function AccordionItem({ title }) {
         />
       </button>
       {isOpen && (
-        <div className="mt-2">
-          {/* Add accordion content here */}
+        <div className="flex flex-col items-start gap-16">
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular mt-16'>Contact Us</button>
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular'>FAQs</button>
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular'>Orders and Delivery</button>
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular'>Returns and refunds</button>
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular'>Promotion terms and Conditions</button>
+          <button className='p-none justify-center items-center gap-8 rounded-xxs paragraphmediumregular'>ROOTSPACE Customer Promise</button>
         </div>
       )}
     </div>
