@@ -121,8 +121,6 @@
 
 // export default Footer;
 
-
-
 // import React from 'react';
 
 // const Footer = () => {
@@ -209,34 +207,45 @@ import '../index.css';
 
 function Footer() {
   return (
-    <footer className="flex p-16 flex-col items-start gap-32 items-stretch bg-bg-primary-inverse text-text-inverse lg:px-120 lg:py-64  ">
+    <footer className='flex p-16 flex-col items-start gap-32 items-stretch bg-bg-primary-inverse text-text-inverse lg:px-120 lg:py-64  '>
       <Logo />
-      <div className="flex flex-col   gap-32 lg:gap-[103px] items-start lg:flex-row ">
-        <div className="flex flex-col w-full gap-32" >
-          <div className="flex flex-col gap-16">
-            <h2 className="headingsh5medium">Rootspace Website</h2>
-            <p className="paragraphmediumregular">Rootspace Website</p>
+      <div className='flex flex-col   gap-32 lg:gap-[100px] items-start lg:flex-row '>
+        <div className='flex flex-col gap-32 items-start'>
+          <div className='flex flex-col gap-16'>
+            <h2 className='headingsh5regular'>Rootspace Website</h2>
+            <p className='paragraphmediumregular'>Rootspace Website</p>
           </div>
           <SocialLinks />
         </div>
-        <AccordionItem title="Customer Service" />
-        <AccordionItem title="About Rootspace" />
-        <div className="flex flex-col max-w-full w-[225px] gap-16 items-start">
-          <h2 className="headingsh5medium">Destination/Currency</h2>
-          <div className="flex gap-16 items-start ">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/544000ce0ad6af8cb84c2ae1754e46a86e7a9609121038541cf12c9fc5ab1f21?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba" alt="Flag"  />
+        <AccordionItem title='Customer Service' />
+        <AccordionItem title='About Rootspace' />
+
+        <div className='flex flex-col gap-16 items-starts'>
+          <h2 className='headingsh5regular'>Destination/Currency</h2>
+          <div className='flex gap-16 items-start '>
+            <img
+              loading='lazy'
+              src='https://cdn.builder.io/api/v1/image/assets/TEMP/544000ce0ad6af8cb84c2ae1754e46a86e7a9609121038541cf12c9fc5ab1f21?placeholderIfAbsent=true&apiKey=6075100a88d44b09b2d6c5b584a495ba'
+              alt='Flag'
+            />
             <span className='paragraphmediumregular'>India, Rupee, INR</span>
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-16 ">
-        <a href="#" className="flex-1 shrink p-none gap-8 self-stretch my-auto rounded-xxs paragraphsmallregular">Privacy policy</a>
-        <a href="#" className="flex-1 shrink p-none gap-8 self-stretch my-auto rounded-xxs paragraphsmallregular">Terms and conditions</a>
+      <div className='flex items-center self-stretch gap-16'>
+        <a
+          href='#'
+          className='flex-1 p-none gap-8 items-center justify-center rounded-xxs paragraphsmallregular lg:flex-none lg:w-auto'>
+          Privacy policy
+        </a>
+        <a
+          href='#'
+          className='flex-1 p-none gap-8 items-center justify-center rounded-xxs paragraphsmallregular lg:flex-none lg:w-auto'>
+          Terms and conditions
+        </a>
       </div>
     </footer>
   );
 }
 
 export default Footer;
-
-
